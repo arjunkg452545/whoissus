@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Who is Sus? - Game Lobby</title>
+<!-- Fonts: Syne (Headlines/Labels) & Plus Jakarta Sans (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim from Design Tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#c3f400",
+            "inverse-on-surface": "#2f3035",
+            "surface": "#121317",
+            "secondary": "#ffb1c4",
+            "on-tertiary": "#003640",
+            "on-primary-fixed-variant": "#3c4d00",
+            "on-primary": "#283500",
+            "surface-container-high": "#292a2e",
+            "inverse-primary": "#506600",
+            "tertiary": "#ffffff",
+            "outline-variant": "#444933",
+            "surface-variant": "#343439",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-bright": "#38393e",
+            "primary": "#ffffff",
+            "on-primary-container": "#556d00",
+            "surface-container": "#1f1f24",
+            "on-secondary-fixed-variant": "#8f0044",
+            "on-tertiary-container": "#006e81",
+            "background": "#121317",
+            "tertiary-fixed": "#acedff",
+            "surface-container-highest": "#343439",
+            "primary-fixed-dim": "#abd600",
+            "on-tertiary-fixed": "#001f26",
+            "on-secondary-container": "#590028",
+            "secondary-fixed": "#ffd9e1",
+            "surface-container-low": "#1a1b20",
+            "primary-fixed": "#c3f400",
+            "on-background": "#e3e2e8",
+            "tertiary-container": "#acedff",
+            "inverse-surface": "#e3e2e8",
+            "on-primary-fixed": "#161e00",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-surface-variant": "#c4c9ac",
+            "on-secondary-fixed": "#3f001a",
+            "surface-tint": "#abd600",
+            "secondary-fixed-dim": "#ffb1c4",
+            "secondary-container": "#ff4a8d",
+            "surface-container-lowest": "#0d0e12",
+            "error-container": "#93000a",
+            "on-secondary": "#65002e",
+            "outline": "#8e9379",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "on-error": "#690005"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-4xl": "3.5rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "gutter-mobile": "1rem",
+            "space-xxs": "0.25rem",
+            "space-lg": "1.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-2xl": "2rem",
+            "space-3xl": "2.5rem",
+            "margin-mobile": "1rem",
+            "margin-desktop": "2rem",
+            "space-md": "1rem",
+            "space-xl": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Syne", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Syne", "sans-serif"],
+            "label-lg": ["Syne", "sans-serif"],
+            "label-pill": ["Syne", "sans-serif"],
+            "label-md": ["Syne", "sans-serif"],
+            "headline-md": ["Syne", "sans-serif"],
+            "display-hero-mobile": ["Syne", "sans-serif"],
+            "headline-sm": ["Syne", "sans-serif"],
+            "display-hero": ["Syne", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "800" }],
+            "label-pill": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero-mobile": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Neo-Brutalist utility classes */
+    .brutal-border {
+      border: 3px solid #0d0e12;
+    }
+    .brutal-border-4 {
+      border: 4px solid #0d0e12;
+    }
+    .brutal-shadow-sm {
+      box-shadow: 2px 2px 0px #0d0e12;
+    }
+    .brutal-shadow {
+      box-shadow: 4px 4px 0px #0d0e12;
+    }
+    .brutal-shadow-lg {
+      box-shadow: 6px 6px 0px #0d0e12;
+    }
+    .brutal-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 0px 0px 0px #0d0e12 !important;
+    }
+    /* Hide scrollbar for category horizontal swipe */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased select-none min-h-screen flex justify-center items-start">
+<!-- Outer Shell: Strictly Constrained Mobile Wrapper (390px - 480px) -->
+<div class="w-full max-w-[480px] min-h-screen bg-surface flex flex-col relative pb-32 border-x-4 border-surface-container-lowest shadow-2xl">
+<!-- TopAppBar from Shared Components JSON -->
+<header class="fixed top-0 left-0 right-0 w-full z-50 flex justify-between items-center px-4 py-3 max-w-[480px] mx-auto bg-surface dark:bg-surface border-b-4 border-surface-container-lowest dark:border-surface-container-lowest [box-shadow:0px_4px_0px_#0d0e12]">
+<!-- Leading Icon / Brand Cluster -->
+<div class="flex items-center gap-2">
+<button aria-label="Game Mode" class="w-10 h-10 rounded-lg brutal-border bg-primary-container flex items-center justify-center brutal-shadow-sm active:translate-x-0.5 active:translate-y-0.5 transition-transform">
+<span class="material-symbols-outlined text-on-primary text-xl">sports_esports</span>
+</button>
+<!-- Headline / Brand Anchor -->
+<div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded brutal-border rotate-[-1.5deg]">
+<span class="font-headline-md text-headline-md font-extrabold uppercase tracking-wider text-primary-container dark:text-primary-container">WHO IS SUS?</span>
+<span class="text-lg animate-pulse">👀</span>
+</div>
+</div>
+<!-- Trailing Cluster -->
+<div class="flex items-center gap-2">
+<!-- Sound Toggle -->
+<button class="w-10 h-10 rounded-lg brutal-border bg-surface-container-high text-on-surface flex items-center justify-center brutal-shadow-sm hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 transition-all" id="soundToggle" title="Toggle Sound">
+<span class="material-symbols-outlined text-primary-container">volume_up</span>
+</button>
+<!-- Rules Pill Button -->
+<button class="flex items-center gap-1 bg-secondary-container text-white px-2.5 py-2 rounded-lg brutal-border brutal-shadow-sm hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 transition-all font-label-pill uppercase" onclick="document.getElementById('rulesModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-base">menu_book</span>
+<span>RULES</span>
+</button>
+</div>
+</header>
+<!-- Main Content Container with Padding for Fixed Header -->
+<main class="flex-1 px-4 pt-20 pb-4 space-y-6">
+<!-- Room Code Banner & Quick Status (Cyber Y2K Sticker Style) -->
+<div class="relative mt-2">
+<div class="bg-surface-container-low brutal-border brutal-shadow rounded-xl p-3 flex items-center justify-between relative overflow-hidden">
+<!-- Cyber hazard micro bar -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary-container via-secondary-container to-tertiary-fixed-dim"></div>
+<div class="flex flex-col">
+<span class="font-label-pill text-label-pill uppercase text-outline text-[10px] tracking-widest">LOBBY CODE</span>
+<span class="font-headline-md text-headline-md text-tertiary-fixed-dim tracking-wider font-extrabold flex items-center gap-2">
+              #SUS-9021
+              <button class="p-1 hover:text-primary transition-colors" onclick="copyCode()" title="Copy code">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#171923] brutal-border brutal-shadow-sm font-label-pill text-label-pill text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+              PUBLIC LIVE
+            </span>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Player Roster Section -->
+<section class="space-y-3">
+<div class="flex items-baseline justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 bg-primary-container text-on-primary font-label-lg text-label-lg uppercase brutal-border brutal-shadow-sm rounded rotate-[-1deg]">
+              ROSTER (6 PLAYERS)
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Need 4-12 to start chaos</span>
+</div>
+<!-- Funky Player Pill Chips Grid -->
+<div class="grid grid-cols-2 gap-2.5" id="rosterChips">
+<!-- Player Chip 1: Andy -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#fef08a] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">🍕</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Andy</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+<!-- Player Chip 2: Sarah -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#ffb1c4] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">⚡</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Sarah</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+<!-- Player Chip 3: Kabir -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#fed7aa] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">🔥</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Kabir</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+<!-- Player Chip 4: Zoya -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#acedff] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">👾</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Zoya</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+<!-- Player Chip 5: Tanya -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#fbcfe8] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">🎀</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Tanya</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+<!-- Player Chip 6: Rohan -->
+<div class="flex items-center justify-between px-3 py-2 bg-[#c4c9ac] text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform">
+<div class="flex items-center gap-2">
+<span class="text-xl">💀</span>
+<span class="font-headline-sm text-[15px] font-bold tracking-tight">Rohan</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+</div>
+</div>
+<!-- Neo-Brutalist Input Bar -->
+<form class="flex gap-2 pt-1" id="addPlayerForm" onsubmit="event.preventDefault(); addPlayer();">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-lowest text-on-surface brutal-border rounded-lg px-3.5 py-2.5 font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-0 placeholder:text-outline brutal-shadow-sm" id="playerNameInput" placeholder="Enter player name..." type="text"/>
+</div>
+<button class="bg-tertiary-fixed-dim text-surface-container-lowest brutal-border brutal-shadow-sm brutal-btn px-4 py-2.5 rounded-lg font-label-lg text-label-lg uppercase flex items-center gap-1 shrink-0 font-extrabold" type="submit">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+<span>+ Add</span>
+</button>
+</form>
+</section>
+<!-- SECTION 3: Category Selection Grid -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm uppercase tracking-wide text-primary">CHOOSE THE DRAMA 🎯</span>
+</div>
+<span class="font-label-pill text-label-pill bg-surface-container-high px-2 py-0.5 rounded text-outline-variant uppercase">1 Pick</span>
+</div>
+<!-- Bento Grid for Categories -->
+<div class="grid grid-cols-2 gap-3" id="categoryContainer">
+<!-- Card 1: Desi Street Food (SELECTED) -->
+<div class="category-card relative p-3 rounded-xl brutal-border brutal-shadow bg-surface-container cursor-pointer transition-all duration-100 ring-4 ring-primary-container bg-surface-container-high" onclick="selectCategory(this)">
+<!-- Selected Badge Stamp -->
+<div class="selected-badge absolute -top-2.5 -right-2 bg-primary-container text-on-primary text-[10px] font-extrabold uppercase px-2 py-0.5 rounded brutal-border brutal-shadow-sm rotate-6 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">check</span> PICKED
+            </div>
+<div class="text-3xl mb-2">🥟</div>
+<h4 class="font-headline-sm text-base text-primary font-extrabold leading-tight">Desi Street Food</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Samosa, Pani Puri, Vada Pav...</p>
+<div class="mt-2.5 flex items-center justify-between">
+<span class="font-label-pill text-[10px] bg-surface-container-lowest text-primary-container px-2 py-0.5 rounded-full brutal-border">48 WORDS</span>
+<span class="text-xs text-primary-container">🔥 HOT</span>
+</div>
+</div>
+<!-- Card 2: Brainrot Slang -->
+<div class="category-card relative p-3 rounded-xl brutal-border brutal-shadow bg-surface-container cursor-pointer transition-all duration-100 hover:bg-surface-container-high" onclick="selectCategory(this)">
+<div class="selected-badge hidden absolute -top-2.5 -right-2 bg-primary-container text-on-primary text-[10px] font-extrabold uppercase px-2 py-0.5 rounded brutal-border brutal-shadow-sm rotate-6 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">check</span> PICKED
+            </div>
+<div class="text-3xl mb-2">💀</div>
+<h4 class="font-headline-sm text-base text-primary font-extrabold leading-tight">Brainrot Slang</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Rizz, Skibidi, Gyatt, No Cap...</p>
+<div class="mt-2.5 flex items-center justify-between">
+<span class="font-label-pill text-[10px] bg-surface-container-lowest text-secondary px-2 py-0.5 rounded-full brutal-border">60 WORDS</span>
+<span class="text-xs text-secondary">⚡ GEN-Z</span>
+</div>
+</div>
+<!-- Card 3: Bollywood & Memes -->
+<div class="category-card relative p-3 rounded-xl brutal-border brutal-shadow bg-surface-container cursor-pointer transition-all duration-100 hover:bg-surface-container-high" onclick="selectCategory(this)">
+<div class="selected-badge hidden absolute -top-2.5 -right-2 bg-primary-container text-on-primary text-[10px] font-extrabold uppercase px-2 py-0.5 rounded brutal-border brutal-shadow-sm rotate-6 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">check</span> PICKED
+            </div>
+<div class="text-3xl mb-2">🎬</div>
+<h4 class="font-headline-sm text-base text-primary font-extrabold leading-tight">Bollywood Memes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Hera Pheri, Sholay, Pushpa...</p>
+<div class="mt-2.5 flex items-center justify-between">
+<span class="font-label-pill text-[10px] bg-surface-container-lowest text-tertiary-fixed-dim px-2 py-0.5 rounded-full brutal-border">54 WORDS</span>
+<span class="text-xs text-tertiary-fixed-dim">🍿 ICONIC</span>
+</div>
+</div>
+<!-- Card 4: College & School -->
+<div class="category-card relative p-3 rounded-xl brutal-border brutal-shadow bg-surface-container cursor-pointer transition-all duration-100 hover:bg-surface-container-high" onclick="selectCategory(this)">
+<div class="selected-badge hidden absolute -top-2.5 -right-2 bg-primary-container text-on-primary text-[10px] font-extrabold uppercase px-2 py-0.5 rounded brutal-border brutal-shadow-sm rotate-6 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">check</span> PICKED
+            </div>
+<div class="text-3xl mb-2">🎒</div>
+<h4 class="font-headline-sm text-base text-primary font-extrabold leading-tight">College &amp; Campus</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Proxy, Backbenchers, Canteen...</p>
+<div class="mt-2.5 flex items-center justify-between">
+<span class="font-label-pill text-[10px] bg-surface-container-lowest text-primary-fixed px-2 py-0.5 rounded-full brutal-border">42 WORDS</span>
+<span class="text-xs text-primary-fixed">☕ VIBES</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Imposter Settings Toggle -->
+<section class="space-y-2">
+<div class="bg-surface-container-low brutal-border brutal-shadow rounded-xl p-4 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-xl">🤫</span>
+<h3 class="font-headline-sm text-base uppercase text-primary font-extrabold">IMPOSTER COUNT</h3>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-white font-label-pill text-[10px] brutal-border brutal-shadow-sm rounded">SECRET</span>
+</div>
+<!-- Stepper Switchers -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-lowest p-1.5 rounded-lg brutal-border">
+<button class="py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight text-on-surface-variant transition-all flex items-center justify-center gap-1" id="sus1" onclick="setImposter(1)">
+<span>1 SUS</span>
+<span class="text-[10px] font-normal opacity-80">(Standard)</span>
+</button>
+<button class="py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight bg-secondary-container text-white brutal-border brutal-shadow-sm transition-all flex items-center justify-center gap-1" id="sus2" onclick="setImposter(2)">
+<span>2 SUS</span>
+<span class="text-[10px] font-normal opacity-90">(Chaos 🔥)</span>
+</button>
+</div>
+<!-- Tip Badge -->
+<div class="flex items-center gap-2 px-3 py-2 bg-surface-container-highest/60 rounded-lg brutal-border text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary-container text-sm">tips_and_updates</span>
+<p class="font-body-sm text-[12px] font-semibold text-primary">
+<span class="text-secondary font-bold">PRO-TIP:</span> 2 Sus recommended for 6+ players!
+            </p>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Game Timer and Custom Round Rules Preview -->
+<section class="bg-surface-container-low brutal-border brutal-shadow rounded-xl p-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest brutal-border flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div>
+<span class="font-label-lg text-xs uppercase text-outline block">ROUND DISCUSSION</span>
+<span class="font-headline-sm text-sm text-primary font-bold">180s Discussion + 45s Vote</span>
+</div>
+</div>
+<button class="text-xs font-label-pill uppercase text-primary-container underline hover:text-white px-2 py-1">EDIT</button>
+</section>
+</main>
+<!-- SECTION 6: Sticky Bottom Action Area -->
+<div class="fixed bottom-14 left-0 right-0 max-w-[480px] mx-auto px-4 py-2 z-40 bg-gradient-to-t from-surface via-surface/90 to-transparent">
+<!-- Massive Full-Width Brutalist CTA -->
+<button class="w-full py-4 px-6 bg-primary-container text-on-primary brutal-border-4 brutal-shadow-lg brutal-btn rounded-xl flex items-center justify-center gap-2 group transition-all duration-75" onclick="triggerStartChaos()">
+<span class="font-headline-lg-mobile text-xl font-extrabold uppercase tracking-wide">START THE CHAOS 🚀</span>
+<span class="material-symbols-outlined text-2xl font-extrabold group-hover:rotate-45 transition-transform">bolt</span>
+</button>
+</div>
+<!-- Bottom Navigation Shell from Shared Components JSON -->
+<!-- Active Navigation Logic: This is the 'LOBBY' phase of the game -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-3 py-2 max-w-[480px] mx-auto bg-surface-container dark:bg-surface-container border-t-4 border-surface-container-lowest dark:border-surface-container-lowest [box-shadow:0px_-4px_0px_#0d0e12]">
+<!-- LOBBY (Active State directly mapped from style_active_navigation) -->
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary dark:text-on-primary rounded-lg border-2 border-surface-container-lowest px-3 py-1.5 [box-shadow:2px_2px_0px_#0d0e12] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-pill text-label-pill uppercase">LOBBY</span>
+</button>
+<!-- ARENA (Inactive State) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+<span class="font-label-pill text-label-pill uppercase">ARENA</span>
+</button>
+<!-- RULES (Inactive State) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1" onclick="document.getElementById('rulesModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+<span class="font-label-pill text-label-pill uppercase">RULES</span>
+</button>
+</nav>
+<!-- Interactive Rules Modal (High Voltage Y2K Cyber Overlay) -->
+<div class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm" id="rulesModal">
+<div class="w-full max-w-sm bg-surface-container-low brutal-border-4 brutal-shadow-lg rounded-2xl p-5 space-y-4 relative">
+<div class="flex items-center justify-between border-b-2 border-surface-container-lowest pb-3">
+<div class="flex items-center gap-2">
+<span class="text-2xl">📜</span>
+<h3 class="font-headline-sm text-lg uppercase text-primary-container font-extrabold">HOW TO PLAY</h3>
+</div>
+<button class="w-8 h-8 rounded-lg bg-surface-container-highest text-white brutal-border brutal-shadow-sm flex items-center justify-center font-bold hover:bg-error" onclick="document.getElementById('rulesModal').classList.add('hidden')">✕</button>
+</div>
+<div class="space-y-3 font-body-sm text-on-surface text-sm">
+<div class="p-2.5 rounded bg-surface-container brutal-border">
+<span class="font-bold text-primary-container block mb-1">1. THE SECRET WORD 🤫</span>
+            All innocents receive the same secret word. The Imposter(s) only see "YOU ARE THE SUSPECT".
+          </div>
+<div class="p-2.5 rounded bg-surface-container brutal-border">
+<span class="font-bold text-secondary block mb-1">2. ONE-WORD CLUES 🎙️</span>
+            Each player shares a single subtle word clue. Give away too much and the Sus will figure out the word!
+          </div>
+<div class="p-2.5 rounded bg-surface-container brutal-border">
+<span class="font-bold text-tertiary-fixed-dim block mb-1">3. THE ACCUSATION 🗳️</span>
+            Debate, sniff out who gave a weird/vague clue, and vote out the Suspect before they guess the word!
+          </div>
+</div>
+<button class="w-full py-3 bg-secondary-container text-white brutal-border brutal-shadow rounded-xl font-label-lg text-label-lg uppercase font-bold brutal-btn" onclick="document.getElementById('rulesModal').classList.add('hidden')">
+          GOT IT, LET'S PLAY!
+        </button>
+</div>
+</div>
+<!-- Toast Notification for Interactions -->
+<div class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2 bg-primary-container text-on-primary font-label-lg text-xs brutal-border brutal-shadow rounded-full uppercase tracking-wider" id="toast">
+      Toast Message
+    </div>
+</div>
+<!-- Inline Vanilla Script for Micro-Interactions -->
+<script>
+    // Copy Lobby Code
+    function copyCode() {
+      navigator.clipboard.writeText("SUS-9021").then(() => {
+        showToast("ROOM CODE COPIED TO CLIPBOARD! 📋");
+      }).catch(() => {
+        showToast("ROOM CODE: #SUS-9021 📋");
+      });
+    }
+
+    // Toast Alert
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2000);
+    }
+
+    // Audio Mute Toggle
+    const soundToggle = document.getElementById('soundToggle');
+    let soundOn = true;
+    soundToggle.addEventListener('click', () => {
+      soundOn = !soundOn;
+      const icon = soundToggle.querySelector('.material-symbols-outlined');
+      if (soundOn) {
+        icon.textContent = 'volume_up';
+        showToast("AUDIO EFFECTS ENABLED 🔊");
+      } else {
+        icon.textContent = 'volume_off';
+        showToast("AUDIO MUTED 🔇");
+      }
+    });
+
+    // Imposter Count Selection
+    function setImposter(count) {
+      const btn1 = document.getElementById('sus1');
+      const btn2 = document.getElementById('sus2');
+      if (count === 1) {
+        btn1.className = "py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight bg-secondary-container text-white brutal-border brutal-shadow-sm transition-all flex items-center justify-center gap-1";
+        btn2.className = "py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight text-on-surface-variant transition-all flex items-center justify-center gap-1";
+        showToast("1 SUSPECT SELECTED (STANDARD)");
+      } else {
+        btn2.className = "py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight bg-secondary-container text-white brutal-border brutal-shadow-sm transition-all flex items-center justify-center gap-1";
+        btn1.className = "py-2.5 px-2 rounded-md font-headline-sm text-xs md:text-sm font-bold tracking-tight text-on-surface-variant transition-all flex items-center justify-center gap-1";
+        showToast("2 SUSPECTS SELECTED (EXTREME CHAOS 🔥)");
+      }
+    }
+
+    // Category Card Selection
+    function selectCategory(el) {
+      const cards = document.querySelectorAll('.category-card');
+      cards.forEach(card => {
+        card.classList.remove('ring-4', 'ring-primary-container', 'bg-surface-container-high');
+        card.classList.add('bg-surface-container');
+        const badge = card.querySelector('.selected-badge');
+        if (badge) badge.classList.add('hidden');
+      });
+
+      el.classList.add('ring-4', 'ring-primary-container', 'bg-surface-container-high');
+      el.classList.remove('bg-surface-container');
+      const curBadge = el.querySelector('.selected-badge');
+      if (curBadge) curBadge.classList.remove('hidden');
+
+      const title = el.querySelector('h4').innerText;
+      showToast(`CATEGORY: ${title.toUpperCase()} 🎯`);
+    }
+
+    // Add Player Function
+    const emojiList = ['😎', '🛸', '🥑', '🦊', '💣', '👑', '🌈', '🍦', '🎲'];
+    const colorList = ['#fef08a', '#ffb1c4', '#fed7aa', '#acedff', '#fbcfe8', '#c4c9ac'];
+    function addPlayer() {
+      const input = document.getElementById('playerNameInput');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
+      const randomColor = colorList[Math.floor(Math.random() * colorList.length)];
+
+      const container = document.getElementById('rosterChips');
+      const newCard = document.createElement('div');
+      newCard.className = "flex items-center justify-between px-3 py-2 text-surface-container-lowest brutal-border brutal-shadow-sm rounded-lg transform hover:-translate-y-0.5 transition-transform animate-bounce";
+      newCard.style.backgroundColor = randomColor;
+      newCard.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="text-xl">${randomEmoji}</span>
+          <span class="font-headline-sm text-[15px] font-bold tracking-tight">${val}</span>
+        </div>
+        <button class="w-6 h-6 rounded-full bg-surface-container-lowest text-white flex items-center justify-center text-xs font-bold hover:bg-error transition-colors leading-none" onclick="this.parentElement.remove()">✕</button>
+      `;
+      container.appendChild(newCard);
+      input.value = '';
+      setTimeout(() => newCard.classList.remove('animate-bounce'), 400);
+      showToast(`ADDED ${val.toUpperCase()} TO THE LOBBY!`);
+    }
+
+    // Start Button Action
+    function triggerStartChaos() {
+      const button = event.currentTarget;
+      button.classList.add('scale-95');
+      setTimeout(() => button.classList.remove('scale-95'), 150);
+      showToast("INITIALIZING SUSPECT PROTOCOL... 🚀");
+    }
+  </script>
+</body></html>

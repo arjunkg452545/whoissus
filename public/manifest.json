@@ -1,0 +1,18 @@
+{
+  "name": "Who is Sus? 👀 - Desi Party Game",
+  "short_name": "Who is Sus?",
+  "description": "The high-voltage Desi social deduction party game for friends & family!",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0e12",
+  "theme_color": "#0d0e12",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

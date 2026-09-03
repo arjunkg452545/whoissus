@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>WHO IS SUS? - Arena Voting</title>
+<!-- Google Fonts: Syne & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#c3f400",
+            "inverse-on-surface": "#2f3035",
+            "surface": "#121317",
+            "secondary": "#ffb1c4",
+            "on-tertiary": "#003640",
+            "on-primary-fixed-variant": "#3c4d00",
+            "on-primary": "#283500",
+            "surface-container-high": "#292a2e",
+            "inverse-primary": "#506600",
+            "tertiary": "#ffffff",
+            "outline-variant": "#444933",
+            "surface-variant": "#343439",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-bright": "#38393e",
+            "primary": "#ffffff",
+            "on-primary-container": "#556d00",
+            "surface-container": "#1f1f24",
+            "on-secondary-fixed-variant": "#8f0044",
+            "on-tertiary-container": "#006e81",
+            "background": "#121317",
+            "tertiary-fixed": "#acedff",
+            "surface-container-highest": "#343439",
+            "primary-fixed-dim": "#abd600",
+            "on-tertiary-fixed": "#001f26",
+            "on-secondary-container": "#590028",
+            "secondary-fixed": "#ffd9e1",
+            "surface-container-low": "#1a1b20",
+            "primary-fixed": "#c3f400",
+            "on-background": "#e3e2e8",
+            "tertiary-container": "#acedff",
+            "inverse-surface": "#e3e2e8",
+            "on-primary-fixed": "#161e00",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-surface-variant": "#c4c9ac",
+            "on-secondary-fixed": "#3f001a",
+            "surface-tint": "#abd600",
+            "secondary-fixed-dim": "#ffb1c4",
+            "secondary-container": "#ff4a8d",
+            "surface-container-lowest": "#0d0e12",
+            "error-container": "#93000a",
+            "on-secondary": "#65002e",
+            "outline": "#8e9379",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "on-error": "#690005"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-4xl": "3.5rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "gutter-mobile": "1rem",
+            "space-xxs": "0.25rem",
+            "space-lg": "1.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-2xl": "2rem",
+            "space-3xl": "2.5rem",
+            "margin-mobile": "1rem",
+            "margin-desktop": "2rem",
+            "space-md": "1rem",
+            "space-xl": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Syne", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Syne", "sans-serif"],
+            "label-lg": ["Syne", "sans-serif"],
+            "label-pill": ["Syne", "sans-serif"],
+            "label-md": ["Syne", "sans-serif"],
+            "headline-md": ["Syne", "sans-serif"],
+            "display-hero-mobile": ["Syne", "sans-serif"],
+            "headline-sm": ["Syne", "sans-serif"],
+            "display-hero": ["Syne", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "800" }],
+            "label-pill": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero-mobile": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Marquee continuous scroll */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-ticker {
+      display: flex;
+      width: 200%;
+      animation: marquee 14s linear infinite;
+    }
+    .animate-ticker:hover {
+      animation-play-state: paused;
+    }
+
+    /* Pulse border effect for active accused */
+    @keyframes susPulse {
+      0%, 100% { box-shadow: 4px 4px 0px #0d0e12; border-color: #ff4a8d; }
+      50% { box-shadow: 4px 4px 0px #ff4a8d; border-color: #c3f400; }
+    }
+    .pulse-accused {
+      animation: susPulse 1.6s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased select-none min-h-screen flex justify-center items-start overflow-x-hidden p-0 m-0">
+<!-- Mobile Device Simulation Frame (390px min-h-screen max-w-[480px]) -->
+<div class="relative w-full max-w-[480px] min-h-screen bg-surface flex flex-col pb-24 shadow-2xl border-x-4 border-surface-container-lowest">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopAppBar (from JSON) -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 py-3 max-w-[480px] mx-auto bg-surface border-b-4 border-surface-container-lowest [box-shadow:0px_4px_0px_#0d0e12] left-1/2 -translate-x-1/2">
+<!-- Leading Icon -->
+<button aria-label="Game Arena" class="w-9 h-9 flex items-center justify-center bg-surface-container-high border-2 border-surface-container-lowest rounded-lg [box-shadow:2px_2px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none text-primary-container">
+<span class="material-symbols-outlined" data-icon="sports_esports">sports_esports</span>
+</button>
+<!-- Headline / Brand -->
+<h1 class="font-headline-md text-headline-md font-extrabold uppercase tracking-wider text-primary-container">
+        WHO IS SUS?
+      </h1>
+<!-- Trailing Icon -->
+<button aria-label="Volume Control" class="w-9 h-9 flex items-center justify-center bg-surface-container-high border-2 border-surface-container-lowest rounded-lg [box-shadow:2px_2px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none text-on-surface">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<!-- Space offset for TopAppBar -->
+<div class="h-16 w-full shrink-0"></div>
+<!-- 1. TOP SECTION: Tip Marquee Ribbon -->
+<section class="w-full bg-secondary-container border-b-2 border-surface-container-lowest overflow-hidden py-1.5 flex items-center relative z-20">
+<div class="animate-ticker whitespace-nowrap flex items-center">
+<span class="font-label-pill text-label-pill text-on-secondary px-4 uppercase tracking-widest font-extrabold flex items-center gap-1">
+          🔥 TIP: The imposter usually laughs too loud and agrees instantly! 👀
+        </span>
+<span class="font-label-pill text-label-pill text-on-secondary px-4 uppercase tracking-widest font-extrabold flex items-center gap-1">
+          🔥 TIP: The imposter usually laughs too loud and agrees instantly! 👀
+        </span>
+</div>
+</section>
+<!-- Main Content Flow -->
+<main class="w-full px-4 pt-3 pb-6 flex flex-col gap-4">
+<!-- Round & Timer Banner Card -->
+<div class="w-full bg-surface-container border-3 border-surface-container-lowest rounded-xl p-3.5 flex items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] relative overflow-hidden">
+<!-- Ambient Cyber Glow Spot -->
+<div class="absolute -right-10 -bottom-10 w-28 h-28 bg-primary-container opacity-10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex flex-col gap-1.5 max-w-[62%]">
+<!-- Phase Badge -->
+<div class="inline-flex items-center gap-1.5 bg-surface-container-high border-2 border-surface-container-lowest px-2.5 py-1 rounded-full w-fit [box-shadow:2px_2px_0px_#0d0e12]">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+<span class="font-label-pill text-label-pill text-tertiary-container uppercase tracking-wider font-extrabold">
+              BLUFF &amp; ACCUSE ROUND 🗣️
+            </span>
+</div>
+<!-- Category Pill -->
+<div class="inline-flex items-center bg-primary-container border-2 border-surface-container-lowest px-2 py-0.5 rounded-md w-fit [box-shadow:2px_2px_0px_#0d0e12] mt-0.5">
+<span class="font-label-md text-label-md text-on-primary-fixed font-extrabold">
+              Category: Desi Street Food 🥟
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+            Question fast, cross-examine &amp; cast accusations!
+          </p>
+</div>
+<!-- Giant Funky Neon Circular Countdown Timer -->
+<div class="relative w-20 h-20 flex items-center justify-center shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 80 80">
+<!-- Background Ring -->
+<circle cx="40" cy="40" fill="#121317" r="34" stroke="#292a2e" stroke-width="7"></circle>
+<!-- Progress Neon Ring -->
+<circle class="transition-all duration-1000" cx="40" cy="40" fill="none" r="34" stroke="#c3f400" stroke-dasharray="213.6" stroke-dashoffset="65" stroke-linecap="round" stroke-width="7"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-sm text-headline-sm text-primary-container font-extrabold tracking-tighter leading-none" id="countdown-timer">
+              01:45
+            </span>
+<span class="font-label-pill text-label-pill text-on-surface-variant uppercase mt-0.5">
+              LEFT
+            </span>
+</div>
+</div>
+</div>
+<!-- Voting Section Header & Badge -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-primary uppercase font-extrabold tracking-wide">
+            WHO LOOKS SUSPECT?
+          </span>
+<span class="text-secondary font-extrabold">🕵️‍♂️</span>
+</div>
+<span class="font-label-pill text-label-pill bg-surface-container-highest text-primary-container border-2 border-surface-container-lowest px-2 py-0.5 rounded-full [box-shadow:1px_1px_0px_#0d0e12] uppercase font-bold">
+          TAP TO ACCUSE
+        </span>
+</div>
+<!-- 2. VOTING ARENA: 6 Suspect Cards Grid (2-column neo-brutal layout) -->
+<div class="grid grid-cols-2 gap-3 w-full" id="suspect-grid">
+<!-- Card 1: Andy 🍕 -->
+<div class="suspect-card relative bg-surface-container-high border-3 border-surface-container-lowest rounded-xl p-3 flex flex-col items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+<!-- Vote Count Tag -->
+<div class="absolute top-2 right-2 bg-tertiary-container text-on-tertiary-fixed border-2 border-surface-container-lowest px-2 py-0.5 rounded-full font-label-pill text-label-pill [box-shadow:1px_1px_0px_#0d0e12] font-extrabold">
+            1 Vote
+          </div>
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-secondary-fixed border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12]">
+            🍕
+          </div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight">Andy</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">"Said samosa crust!"</span>
+</div>
+<!-- SUS Button -->
+<button class="w-full py-2 px-1 bg-surface-container-lowest border-2 border-primary-container rounded-lg font-label-lg text-label-lg text-primary-container flex items-center justify-center gap-1 hover:bg-primary-container hover:text-on-primary transition-colors [box-shadow:2px_2px_0px_#c3f400]">
+<span>SUS?</span>
+<span>👉</span>
+</button>
+</div>
+<!-- Card 2: Sarah ⚡ (MOST SUSPECT / ACCUSED PULSING STATE) -->
+<div class="suspect-card relative bg-surface-container-high border-4 border-secondary-container pulse-accused rounded-xl p-3 flex flex-col items-center justify-between cursor-pointer">
+<!-- Stamped Ribbon Badge (Slanted neo-brutal stamp) -->
+<div class="absolute -top-3 -right-2 bg-secondary-container text-tertiary border-2 border-surface-container-lowest px-2.5 py-1 rounded-md font-label-pill text-label-pill [box-shadow:3px_3px_0px_#0d0e12] transform rotate-[-6deg] z-10 flex items-center gap-0.5 font-extrabold tracking-wider">
+<span>MOST SUSPECT 🚨 (3 Votes)</span>
+</div>
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-primary-container border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12] relative">
+            ⚡
+            <!-- Target Crosshair Graphic Badge -->
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-error-container text-tertiary rounded-full border-2 border-surface-container-lowest flex items-center justify-center text-[10px] font-bold">
+              🎯
+            </div>
+</div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-secondary-container font-extrabold tracking-tight">Sarah</h3>
+<span class="font-body-sm text-body-sm text-secondary font-semibold">"Pani puri without pani?!"</span>
+</div>
+<!-- Accused Status Action -->
+<button class="w-full py-2 px-1 bg-secondary-container border-2 border-surface-container-lowest rounded-lg font-label-lg text-label-lg text-tertiary flex items-center justify-center gap-1 [box-shadow:2px_2px_0px_#0d0e12]">
+<span>ACCUSED</span>
+<span class="material-symbols-outlined !text-[16px]" data-icon="how_to_vote">how_to_vote</span>
+</button>
+</div>
+<!-- Card 3: Kabir 🔥 -->
+<div class="suspect-card relative bg-surface-container-high border-3 border-surface-container-lowest rounded-xl p-3 flex flex-col items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-secondary-container border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12]">
+            🔥
+          </div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight">Kabir</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">Defending Sarah?</span>
+</div>
+<button class="w-full py-2 px-1 bg-surface-container border-2 border-surface-container-lowest rounded-lg font-label-lg text-label-lg text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors [box-shadow:2px_2px_0px_#0d0e12] flex items-center justify-center gap-1">
+<span>SUS?</span>
+<span>👉</span>
+</button>
+</div>
+<!-- Card 4: Zoya 👾 -->
+<div class="suspect-card relative bg-surface-container-high border-3 border-surface-container-lowest rounded-xl p-3 flex flex-col items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+<!-- Vote Count Tag -->
+<div class="absolute top-2 right-2 bg-tertiary-container text-on-tertiary-fixed border-2 border-surface-container-lowest px-2 py-0.5 rounded-full font-label-pill text-label-pill [box-shadow:1px_1px_0px_#0d0e12] font-extrabold">
+            1 Vote
+          </div>
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-tertiary-fixed border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12]">
+            👾
+          </div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight">Zoya</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">"Too quiet today"</span>
+</div>
+<button class="w-full py-2 px-1 bg-surface-container border-2 border-surface-container-lowest rounded-lg font-label-lg text-label-lg text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors [box-shadow:2px_2px_0px_#0d0e12] flex items-center justify-center gap-1">
+<span>SUS?</span>
+<span>👉</span>
+</button>
+</div>
+<!-- Card 5: Tanya 🎀 -->
+<div class="suspect-card relative bg-surface-container-high border-3 border-surface-container-lowest rounded-xl p-3 flex flex-col items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-secondary-fixed border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12]">
+            🎀
+          </div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight">Tanya</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">"Voted on Andy"</span>
+</div>
+<button class="w-full py-2 px-1 bg-surface-container border-2 border-surface-container-lowest rounded-lg font-label-lg text-label-lg text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors [box-shadow:2px_2px_0px_#0d0e12] flex items-center justify-center gap-1">
+<span>SUS?</span>
+<span>👉</span>
+</button>
+</div>
+<!-- Card 6: Rohan 💀 -->
+<div class="suspect-card relative bg-surface-container-high border-3 border-surface-container-lowest rounded-xl p-3 flex flex-col items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none cursor-pointer">
+<!-- Avatar -->
+<div class="w-14 h-14 rounded-full bg-surface-bright border-3 border-surface-container-lowest flex items-center justify-center text-3xl mt-2 [box-shadow:2px_2px_0px_#0d0e12]">
+            💀
+          </div>
+<div class="text-center mt-2 mb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight">Rohan</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">"Eating vada pav"</span>
+</div>
+<button class="w-full py-2 px-1 bg-surface-container border-2 border-surface-container-lowest rounded-lg font-label-lg text-label-lg text-on-surface hover:bg-primary-container hover:text-on-primary transition-colors [box-shadow:2px_2px_0px_#0d0e12] flex items-center justify-center gap-1">
+<span>SUS?</span>
+<span>👉</span>
+</button>
+</div>
+</div>
+<!-- 3. SUDDEN DEATH / TIED WARNING BANNER -->
+<div class="w-full bg-secondary-container/20 border-2 border-secondary-container rounded-xl p-2.5 flex items-center gap-2.5 [box-shadow:3px_3px_0px_#0d0e12] relative overflow-hidden">
+<span class="w-7 h-7 rounded-lg bg-secondary-container text-tertiary flex items-center justify-center shrink-0 border-2 border-surface-container-lowest [box-shadow:1px_1px_0px_#0d0e12] font-bold text-sm">
+          ⚡
+        </span>
+<p class="font-label-md text-label-md text-secondary-fixed tracking-tight leading-snug">
+<span class="font-extrabold text-tertiary uppercase">Sarah</span> is leading the accusations! Is she bluffing or truly clueless?
+        </p>
+</div>
+<!-- 4. BOTTOM ACTION BAR (CTA Buttons) -->
+<div class="w-full flex items-center gap-3 pt-1">
+<!-- Ghost Secondary Action -->
+<button class="w-2/5 py-3.5 px-3 bg-surface-container-low border-3 border-outline-variant hover:border-primary-container text-on-surface rounded-xl font-label-lg text-label-lg uppercase tracking-wider flex items-center justify-center gap-1 [box-shadow:3px_3px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span>SKIP ROUND</span>
+<span class="text-sm">⏱️</span>
+</button>
+<!-- High-Voltage Primary CTA -->
+<button class="w-3/5 py-3.5 px-3 bg-primary-container border-4 border-surface-container-lowest text-on-primary rounded-xl font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center gap-2 [box-shadow:4px_4px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
+<span>REVEAL IMPOSTER</span>
+<span class="text-xl">💥</span>
+</button>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: BottomNavBar (from JSON) -->
+<!-- Active state determined by semantic match: Arena screen -> ARENA (index 1) -->
+<!-- ========================================================================= -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-3 py-2 max-w-[480px] mx-auto bg-surface-container border-t-4 border-surface-container-lowest [box-shadow:0px_-4px_0px_#0d0e12] left-1/2 -translate-x-1/2">
+<!-- LOBBY (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none" href="#lobby">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-pill text-label-pill uppercase mt-0.5">LOBBY</span>
+</a>
+<!-- ARENA (Active: current page is the Voting Arena) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary rounded-lg border-2 border-surface-container-lowest px-3 py-1.5 [box-shadow:2px_2px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none" href="#arena">
+<span class="material-symbols-outlined" data-icon="how_to_vote" style="font-variation-settings: 'FILL' 1;">how_to_vote</span>
+<span class="font-label-pill text-label-pill uppercase mt-0.5">ARENA</span>
+</a>
+<!-- RULES (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1.5 hover:translate-x-0.5 hover:translate-y-0.5 transition-transform duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none" href="#rules">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-pill text-label-pill uppercase mt-0.5">RULES</span>
+</a>
+</nav>
+</div>
+<!-- Inline Interaction Logic: Dynamic voting feedback & countdown simulation -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Countdown Timer countdown logic
+      let secondsRemaining = 105; // 01:45
+      const timerElement = document.getElementById('countdown-timer');
+
+      const timerInterval = setInterval(() => {
+        if (secondsRemaining <= 0) {
+          clearInterval(timerInterval);
+          return;
+        }
+        secondsRemaining--;
+        const mins = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
+        const secs = String(secondsRemaining % 60).padStart(2, '0');
+        if (timerElement) {
+          timerElement.textContent = `${mins}:${secs}`;
+        }
+      }, 1000);
+
+      // Card tactile selection
+      const cards = document.querySelectorAll('.suspect-card');
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          // Play micro bounce feel
+          card.classList.add('scale-95');
+          setTimeout(() => card.classList.remove('scale-95'), 120);
+        });
+      });
+    });
+  </script>
+</body></html>

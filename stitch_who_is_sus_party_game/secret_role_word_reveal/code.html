@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Who is Sus? - Secret Role Reveal</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Syne and Plus Jakarta Sans fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#c3f400",
+            "inverse-on-surface": "#2f3035",
+            "surface": "#121317",
+            "secondary": "#ffb1c4",
+            "on-tertiary": "#003640",
+            "on-primary-fixed-variant": "#3c4d00",
+            "on-primary": "#283500",
+            "surface-container-high": "#292a2e",
+            "inverse-primary": "#506600",
+            "tertiary": "#ffffff",
+            "outline-variant": "#444933",
+            "surface-variant": "#343439",
+            "error": "#ffb4ab",
+            "surface-dim": "#121317",
+            "on-error-container": "#ffdad6",
+            "surface-bright": "#38393e",
+            "primary": "#ffffff",
+            "on-primary-container": "#556d00",
+            "surface-container": "#1f1f24",
+            "on-secondary-fixed-variant": "#8f0044",
+            "on-tertiary-container": "#006e81",
+            "background": "#121317",
+            "tertiary-fixed": "#acedff",
+            "surface-container-highest": "#343439",
+            "primary-fixed-dim": "#abd600",
+            "on-tertiary-fixed": "#001f26",
+            "on-secondary-container": "#590028",
+            "secondary-fixed": "#ffd9e1",
+            "surface-container-low": "#1a1b20",
+            "primary-fixed": "#c3f400",
+            "on-background": "#e3e2e8",
+            "tertiary-container": "#acedff",
+            "inverse-surface": "#e3e2e8",
+            "on-primary-fixed": "#161e00",
+            "on-surface": "#e3e2e8",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "on-surface-variant": "#c4c9ac",
+            "on-secondary-fixed": "#3f001a",
+            "surface-tint": "#abd600",
+            "secondary-fixed-dim": "#ffb1c4",
+            "secondary-container": "#ff4a8d",
+            "surface-container-lowest": "#0d0e12",
+            "error-container": "#93000a",
+            "on-secondary": "#65002e",
+            "outline": "#8e9379",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "on-error": "#690005"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-4xl": "3.5rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "gutter-mobile": "1rem",
+            "space-xxs": "0.25rem",
+            "space-lg": "1.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-2xl": "2rem",
+            "space-3xl": "2.5rem",
+            "margin-mobile": "1rem",
+            "margin-desktop": "2rem",
+            "space-md": "1rem",
+            "space-xl": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Syne", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Syne", "sans-serif"],
+            "label-lg": ["Syne", "sans-serif"],
+            "label-pill": ["Syne", "sans-serif"],
+            "label-md": ["Syne", "sans-serif"],
+            "headline-md": ["Syne", "sans-serif"],
+            "display-hero-mobile": ["Syne", "sans-serif"],
+            "headline-sm": ["Syne", "sans-serif"],
+            "display-hero": ["Syne", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "800" }],
+            "label-pill": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero-mobile": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Cyber Neo-Brutalist Scanlines */
+    .bg-scanlines {
+      background-image: linear-gradient(rgba(13, 14, 18, 0) 50%, rgba(0, 0, 0, 0.45) 50%);
+      background-size: 100% 4px;
+    }
+
+    /* Tactile Switch Compression */
+    .tap-press:active {
+      transform: translate(3px, 3px) !important;
+      box-shadow: 0px 0px 0px #0d0e12 !important;
+    }
+
+    /* Neon Pulse Rings for Hold button */
+    @keyframes cyanPing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 0.2; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .animate-cyan-pulse {
+      animation: cyanPing 2s infinite ease-in-out;
+    }
+
+    /* Hazard Stripe background */
+    .hazard-stripes {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ff4a8d,
+        #ff4a8d 8px,
+        #0d0e12 8px,
+        #0d0e12 16px
+      );
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary-container selection:text-surface-container-lowest overflow-x-hidden">
+<!-- Mobile Wrapper Simulation Frame: 390px x 844px style -->
+<div class="w-full max-w-[420px] min-h-screen flex flex-col bg-surface border-x-4 border-surface-container-lowest relative pb-8 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+<!-- TopAppBar Shared Component Anchor -->
+<header class="bg-surface text-primary-container font-headline-md text-headline-md docked full-width top-0 border-b-4 border-surface-container-lowest [box-shadow:0px_4px_0px_#0d0e12] w-full z-50 flex justify-between items-center px-4 py-3">
+<button aria-label="Game Menu" class="flex items-center justify-center w-10 h-10 bg-surface-container border-2 border-surface-container-lowest text-primary-container rounded-lg [box-shadow:2px_2px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined" data-icon="sports_esports" style="font-size: 24px;">sports_esports</span>
+</button>
+<!-- Exact headline from JSON anchors -->
+<h1 class="font-headline-md text-headline-md font-extrabold uppercase tracking-wider text-primary-container">
+        WHO IS SUS?
+      </h1>
+<button aria-label="Sound Toggle" class="flex items-center justify-center w-10 h-10 bg-surface-container border-2 border-surface-container-lowest text-primary-container rounded-lg [box-shadow:2px_2px_0px_#0d0e12] hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined" data-icon="volume_up" style="font-size: 24px;">volume_up</span>
+</button>
+</header>
+<!-- Content Canvas -->
+<main class="flex-1 flex flex-col px-4 pt-3 gap-3.5 relative bg-scanlines">
+<!-- 1. Top Banner / Header -->
+<section class="flex flex-col items-center gap-1.5 w-full">
+<!-- Progress Indicator Pill -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-high border-2 border-surface-container-lowest rounded-full [box-shadow:2px_2px_0px_#0d0e12]">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-pill text-label-pill uppercase text-primary-container font-extrabold tracking-wider">
+            PLAYER 3 OF 6 • PASS &amp; PLAY 📱
+          </span>
+</div>
+<!-- Mode Sub-Headline with Lock -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md tracking-wider uppercase">
+<span class="material-symbols-outlined text-secondary-container" data-icon="lock" style="font-size: 16px; font-variation-settings: 'FILL' 1;">lock</span>
+<span>CONFIDENTIAL PEEK MODE</span>
+<span class="inline-block w-1.5 h-1.5 bg-secondary-container rounded-full"></span>
+<span class="text-secondary-fixed-dim">ROUND 1</span>
+</div>
+</section>
+<!-- 2. Step 1: Pass Phone Card -->
+<section class="relative">
+<div class="bg-primary-container text-surface-container-lowest border-4 border-surface-container-lowest p-3 rounded-lg [box-shadow:4px_4px_0px_#0d0e12] transform -rotate-1 relative overflow-hidden">
+<!-- Background Deco Badge -->
+<div class="absolute -right-4 -bottom-4 opacity-15 font-display-hero text-display-hero font-extrabold select-none pointer-events-none">
+            3/6
+          </div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center justify-center bg-surface-container-lowest text-primary-container w-7 h-7 rounded-md font-headline-sm text-headline-sm font-extrabold">
+              !
+            </span>
+<div class="font-headline-sm text-headline-sm font-extrabold tracking-tight uppercase leading-none">
+              PASS PHONE TO SARAH ⚡
+            </div>
+</div>
+<div class="mt-2 flex items-center gap-1.5 bg-surface-container-lowest text-on-surface text-body-sm font-body-sm px-2.5 py-1 rounded border-2 border-surface-container-lowest">
+<span class="text-error font-extrabold text-sm">⚠️</span>
+<span class="font-semibold text-xs leading-snug">Don't let Andy or Kabir peek over your shoulder!</span>
+</div>
+</div>
+</section>
+<!-- Interactive Switcher (Civilian vs Imposter Variant Peek) -->
+<section class="flex items-center justify-between bg-surface-container-high p-1 rounded-lg border-2 border-surface-container-lowest [box-shadow:2px_2px_0px_#0d0e12]">
+<button class="flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 bg-tertiary-fixed text-surface-container-lowest border-2 border-surface-container-lowest [box-shadow:2px_2px_0px_#0d0e12]" id="viewCivilianBtn" onclick="toggleRolePreview('civilian')">
+          CIVILIAN WORD CARD
+        </button>
+<button class="flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 text-on-surface-variant hover:text-on-surface" id="viewImposterBtn" onclick="toggleRolePreview('imposter')">
+          IMPOSTER SUS CARD 💀
+        </button>
+</section>
+<!-- 3. Interactive Secret Reveal Card Canvas -->
+<section class="relative flex-1 flex flex-col justify-center min-h-[305px]">
+<!-- STATE A: CIVILIAN CARD (Active by default) -->
+<div class="w-full bg-tertiary-fixed text-surface-container-lowest border-4 border-surface-container-lowest rounded-xl p-4 [box-shadow:4px_4px_0px_#0d0e12] flex flex-col justify-between relative transition-all duration-150" id="civilianCard">
+<!-- Tilting Top-Right Badge -->
+<div class="absolute -top-3.5 right-3 bg-secondary-container text-tertiary px-3 py-0.5 rounded-full border-2 border-surface-container-lowest font-label-pill text-label-pill tracking-wider uppercase transform rotate-3 [box-shadow:2px_2px_0px_#0d0e12]">
+            CONFIDENTIAL • CIVILIAN
+          </div>
+<!-- Category Banner -->
+<div class="flex items-center justify-between border-b-2 border-surface-container-lowest pb-2">
+<span class="font-label-pill text-label-pill uppercase font-extrabold tracking-wider bg-surface-container-lowest text-tertiary-fixed px-2 py-0.5 rounded">
+              CATEGORY: DESI STREET FOOD 🥟
+            </span>
+<span class="material-symbols-outlined text-surface-container-lowest" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<!-- Secret Word Area with Hold-To-Peel Interactivity -->
+<div class="my-3 py-4 bg-tertiary-fixed-dim/40 rounded-lg border-3 border-surface-container-lowest border-dashed flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[110px]">
+<!-- Hidden Cover Layer (Removed when holding/active) -->
+<div class="absolute inset-0 bg-surface-container-lowest text-tertiary flex flex-col items-center justify-center gap-1.5 z-10 transition-opacity duration-150 p-2 select-none cursor-pointer" id="hiddenOverlay">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-12 h-12 rounded-full bg-tertiary-fixed-dim/20 animate-cyan-pulse"></span>
+<span class="material-symbols-outlined text-tertiary-fixed text-3xl" data-icon="fingerprint">fingerprint</span>
+</div>
+<span class="font-label-lg text-label-lg font-extrabold text-primary-container tracking-wider uppercase">
+                HOLD TO REVEAL SECRET 🤫
+              </span>
+<span class="font-label-pill text-label-pill text-on-surface-variant uppercase">
+                Press &amp; keep finger on card
+              </span>
+</div>
+<!-- Revealed Content Underneath -->
+<div class="px-2">
+<div class="font-label-pill text-label-pill uppercase text-on-tertiary-container tracking-widest font-extrabold">
+                YOUR SECRET WORD IS:
+              </div>
+<div class="font-display-hero-mobile text-display-hero-mobile font-extrabold tracking-tighter text-surface-container-lowest uppercase mt-0.5 leading-none">
+                PANI PURI
+              </div>
+<!-- Secret Hint -->
+<div class="mt-2 bg-surface-container-lowest text-tertiary text-xs font-body-sm px-2.5 py-1 rounded border border-surface-container-lowest inline-block">
+                💧 <span class="text-tertiary-fixed font-bold">Hint:</span> It's round, crispy, and filled with spicy tangy water!
+              </div>
+</div>
+</div>
+<!-- Directive Footer -->
+<div class="bg-surface-container-lowest/10 border-2 border-surface-container-lowest rounded-md p-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-container-lowest" data-icon="shield">shield</span>
+<p class="font-label-md text-label-md font-bold text-surface-container-lowest uppercase leading-tight">
+              Act casual. Blend in. Don't be sus!
+            </p>
+</div>
+</div>
+<!-- STATE B: IMPOSTER SUS ALERT CARD (Glitch Magenta #ff4a8d) -->
+<div class="w-full bg-secondary-container text-tertiary border-4 border-surface-container-lowest rounded-xl p-4 [box-shadow:4px_4px_0px_#0d0e12] flex flex-col justify-between relative hidden transition-all duration-150" id="imposterCard">
+<!-- Tilting Top-Right Hazard Badge -->
+<div class="absolute -top-3.5 right-3 bg-primary-container text-surface-container-lowest px-3 py-0.5 rounded-full border-2 border-surface-container-lowest font-label-pill text-label-pill tracking-wider uppercase transform -rotate-3 [box-shadow:2px_2px_0px_#0d0e12]">
+            DANGER • CODE RED
+          </div>
+<!-- Glitch Header -->
+<div class="flex items-center justify-between border-b-2 border-surface-container-lowest pb-2">
+<span class="font-label-pill text-label-pill uppercase font-extrabold tracking-wider bg-surface-container-lowest text-secondary px-2 py-0.5 rounded">
+              ROLE ASSIGNMENT
+            </span>
+<span class="material-symbols-outlined text-tertiary" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<!-- Imposter Hero Section -->
+<div class="my-3 py-3 bg-surface-container-lowest rounded-lg border-3 border-tertiary border-dashed flex flex-col items-center justify-center text-center p-3 relative overflow-hidden">
+<div class="w-10 h-10 rounded-full bg-secondary-container border-2 border-tertiary flex items-center justify-center mb-1 text-tertiary text-2xl">
+              💀
+            </div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight text-secondary uppercase leading-none">
+              YOU ARE THE IMPOSTER!
+            </div>
+<div class="mt-2 text-tertiary text-body-sm font-body-sm font-semibold leading-snug max-w-[260px]">
+              You <span class="underline decoration-primary-container text-primary-container font-extrabold">DON'T</span> know the word! Listen carefully to hints and fake it till you make it.
+            </div>
+</div>
+<!-- Imposter Strategy -->
+<div class="bg-surface-container-lowest text-primary-container border-2 border-surface-container-lowest rounded-md p-2 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container" data-icon="psychology">psychology</span>
+<span class="font-label-pill text-label-pill uppercase font-extrabold">BLUFF LEVEL: MAXIMUM</span>
+</div>
+<span class="font-label-pill text-label-pill bg-secondary-container text-tertiary px-1.5 py-0.5 rounded uppercase font-extrabold">
+              SUSPECT #3
+            </span>
+</div>
+</div>
+</section>
+<!-- Quick Interactive Helper Tooltip -->
+<div class="flex items-center justify-center gap-1.5 text-center">
+<span class="material-symbols-outlined text-primary-container text-base" data-icon="touch_app">touch_app</span>
+<p class="font-label-pill text-label-pill uppercase text-on-surface-variant">
+          Tap card to peek / simulate hold reveal
+        </p>
+</div>
+<!-- 4. Action & Safety Exit -->
+<section class="mt-auto flex flex-col gap-2 pt-2">
+<!-- Chunky Bottom Action Button (Electric Safety Accent) -->
+<button class="w-full bg-secondary-container hover:bg-secondary text-surface-container-lowest font-headline-sm text-headline-sm font-extrabold uppercase py-3.5 px-4 rounded-xl border-4 border-surface-container-lowest [box-shadow:4px_4px_0px_#0d0e12] flex items-center justify-center gap-2 tap-press transition-all duration-75" id="hidePassBtn" onclick="triggerPassedEffect()">
+<span>I'VE SEEN IT (HIDE &amp; PASS)</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward" style="font-size: 26px; font-weight: 800;">arrow_forward</span>
+</button>
+<!-- Quick Countdown Safety Lock Indicator -->
+<div class="flex items-center justify-between px-2 text-on-surface-variant font-label-md text-label-md uppercase">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container" data-icon="timer" style="font-size: 16px;">timer</span>
+<span>Auto-hides in: <strong class="text-primary-container font-headline-sm text-headline-sm font-extrabold" id="countdownText">5s</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="text-[11px] font-extrabold tracking-wider">ANTI-PEEK SECURED</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shared Component Blueprint Anchor (Relevance filter: Sub-page temporary action suppresses full bottom tabs, but standard docked styling maintains structure) -->
+<div class="w-full px-4 pt-2">
+<div class="h-1 w-24 bg-surface-container-highest rounded-full mx-auto opacity-40"></div>
+</div>
+</div>
+<!-- Interactive Logic for Hold-to-Reveal and Card Toggle -->
+<script>
+    const hiddenOverlay = document.getElementById('hiddenOverlay');
+    const civilianCard = document.getElementById('civilianCard');
+    const imposterCard = document.getElementById('imposterCard');
+    const viewCivilianBtn = document.getElementById('viewCivilianBtn');
+    const viewImposterBtn = document.getElementById('viewImposterBtn');
+    const countdownText = document.getElementById('countdownText');
+
+    let revealed = false;
+    let timerSeconds = 5;
+    let timerInterval;
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerSeconds = 5;
+      countdownText.innerText = timerSeconds + "s";
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        if (timerSeconds <= 0) {
+          countdownText.innerText = "LOCKED";
+          hideSecret();
+          clearInterval(timerInterval);
+        } else {
+          countdownText.innerText = timerSeconds + "s";
+        }
+      }, 1000);
+    }
+
+    // Toggle Secret Reveal
+    function toggleReveal() {
+      revealed = !revealed;
+      if (revealed) {
+        hiddenOverlay.style.opacity = '0';
+        hiddenOverlay.style.pointerEvents = 'none';
+        resetTimer();
+      } else {
+        hideSecret();
+      }
+    }
+
+    function hideSecret() {
+      revealed = false;
+      hiddenOverlay.style.opacity = '1';
+      hiddenOverlay.style.pointerEvents = 'auto';
+    }
+
+    hiddenOverlay.addEventListener('click', toggleReveal);
+
+    // Switch between Civilian and Imposter demo preview
+    function toggleRolePreview(role) {
+      if (role === 'civilian') {
+        civilianCard.classList.remove('hidden');
+        imposterCard.classList.add('hidden');
+
+        viewCivilianBtn.className = "flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 bg-tertiary-fixed text-surface-container-lowest border-2 border-surface-container-lowest [box-shadow:2px_2px_0px_#0d0e12]";
+        viewImposterBtn.className = "flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 text-on-surface-variant hover:text-on-surface";
+      } else {
+        civilianCard.classList.add('hidden');
+        imposterCard.classList.remove('hidden');
+
+        viewImposterBtn.className = "flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 bg-secondary-container text-tertiary border-2 border-surface-container-lowest [box-shadow:2px_2px_0px_#0d0e12]";
+        viewCivilianBtn.className = "flex-1 py-1.5 text-center font-label-pill text-label-pill uppercase rounded-md font-extrabold transition-all duration-75 text-on-surface-variant hover:text-on-surface";
+      }
+    }
+
+    function triggerPassedEffect() {
+      hideSecret();
+      const btn = document.getElementById('hidePassBtn');
+      const originalText = btn.innerHTML;
+      btn.classList.add('bg-primary-container');
+      btn.innerHTML = `<span>PASSING TO NEXT PLAYER... ⚡</span>`;
+      setTimeout(() => {
+        btn.classList.remove('bg-primary-container');
+        btn.innerHTML = originalText;
+      }, 1200);
+    }
+
+    // Start safety countdown
+    resetTimer();
+  </script>
+</body></html>
