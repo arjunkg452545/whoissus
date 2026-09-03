@@ -21,13 +21,9 @@ export default function PassPhoneScreen({
   const handleStartPeek = () => {
     setIsPeeking(true);
     setHasPeekingOccurred(true);
-    if (isImposter) {
-      sounds.playImposterAlarm();
-      triggerHaptic('warning');
-    } else {
-      sounds.playPeek();
-      triggerHaptic('medium');
-    }
+    // Identical sound & haptic for ALL players so no one sitting nearby can guess who is Sus!
+    sounds.playPeek();
+    triggerHaptic('light');
   };
 
   const handleEndPeek = () => {
