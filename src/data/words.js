@@ -43,6 +43,7 @@ export const CATEGORIES = [
     color: "bg-[#acedff]",
     accent: "#4cd7f6",
     words: [
+      { word: "CHACHA VASTEGUNA HUIYA", undercoverWord: "CAN I GET A HOYA", hint: "Reels ka wo viral dialogue jo kisi ko samajh nahi aaya par poora India chilla raha hai!", decoys: ["Can I Get A Hoya", "Bhupendra Jogi", "Moye Moye"] },
       { word: "SKIBIDI TOILET", undercoverWord: "FANUM TAX", hint: "Dop dop dop yes yes, head spinning out of ceramic.", decoys: ["Fanum Tax", "Grimace Shake", "Baby Gronk"] },
       { word: "RIZZLER", undercoverWord: "SIGMA MALE", hint: "Unspoken charisma that pulls without saying a word.", decoys: ["Mewing", "Looksmaxxing", "Sigma Male"] },
       { word: "MEWING", undercoverWord: "LOOKSMAXXING", hint: "Tongue glued to roof of mouth, don't talk to me.", decoys: ["Jawline Flex", "Looksmaxxing", "Canthal Tilt"] },
@@ -130,8 +131,53 @@ export const CHAOS_MODIFIERS = [
     id: "reverse-interrogation",
     title: "Reverse Interrogation 🔄",
     desc: "Instead of giving clues, every player must ask 1 trick question to the person on their left!"
+  },
+  {
+    id: "hoya-rule",
+    title: "Chacha Vasteguna Rule 🗣️",
+    desc: "Before casting any vote on a suspect, you MUST shout 'HUIYA!' or your vote is cancelled!"
   }
 ];
+
+export const PARTY_DARES = [
+  { id: 1, text: "Darwaza khol ke ya kamre ke beech me khade hoke chillaao: 'CHACHA VASTEGUNA HUIYA!' (3 times loudly) 🗣️", emoji: "📢", difficulty: "SPICY 🔥" },
+  { id: 2, text: "Squad ko phone do aur unko aapki last chat pe ek random emoji bhejne do bina context ke! 📱", emoji: "💬", difficulty: "SAVAGE 💀" },
+  { id: 3, text: "Agla pura 1 minute squad ke har member ko 'Ji Huzoor / Sarkar' bolna padega! 🫡", emoji: "👑", difficulty: "FUNNY 😂" },
+  { id: 4, text: "Agla pura round kisi Bollywood sad gaane ki tone me ro-ro kar dialogue bolna padega! 🎭", emoji: "🎻", difficulty: "DRAMA 🎬" },
+  { id: 5, text: "Bina gaane ke 15 seconds tak 'Chikni Chameli' ka hook step karke dikhaao! 💃", emoji: "🕺", difficulty: "LEGEND ⚡" },
+  { id: 6, text: "Bina haath lagaye table se ek glass paani piyo ya 10 pushups maaro! 🥛", emoji: "💪", difficulty: "FITNESS 🏋️" },
+  { id: 7, text: "Camera me bina smile kiye ekdum khaufnaak criminal mugshot pose do aur squad ko photo lene do! 📸", emoji: "🚔", difficulty: "CHILL 📸" },
+  { id: 8, text: "Apne phone ka last YouTube search query squad ko zor se padhke sunao! 🔍", emoji: "👀", difficulty: "DEADLY 💀" }
+];
+
+export function calculateAuraOutcome({ isAccusedImposter, isLastStandGuessCorrect, accusedPlayerName }) {
+  if (isAccusedImposter && isLastStandGuessCorrect) {
+    return {
+      points: 15000,
+      title: "+15,000 AURA 👑 (SUPREME HEIST)",
+      badge: "GIGACHAD",
+      desc: `${accusedPlayerName} was caught but STOLE the win in Last Stand! Legendary flex!`,
+      status: 'positive'
+    };
+  }
+  if (isAccusedImposter && !isLastStandGuessCorrect) {
+    return {
+      points: -10000,
+      title: "-10,000 AURA 📉 (EMOTIONAL DAMAGE)",
+      badge: "BUSTED",
+      desc: `${accusedPlayerName} was caught red-handed and failed the guess. Bro is finished!`,
+      status: 'negative'
+    };
+  }
+  // Innocent framed
+  return {
+    points: -5000,
+    title: "-5,000 AURA 💀 (BRO IS COOKED)",
+    badge: "WRONGFULLY FRAMED",
+    desc: `${accusedPlayerName} was completely innocent but squad framed them! Cooked behavior!`,
+    status: 'negative'
+  };
+}
 
 export const TIPS = [
   "🔥 TIP: The Sus usually agrees too quickly to avoid suspicion! 👀",

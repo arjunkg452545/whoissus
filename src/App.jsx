@@ -7,6 +7,7 @@ import ArenaScreen from './components/ArenaScreen';
 import ResultModal from './components/ResultModal';
 import CustomPackModal from './components/CustomPackModal';
 import FIRReportModal from './components/FIRReportModal';
+import DareModal from './components/DareModal';
 import { CATEGORIES, CHAOS_MODIFIERS } from './data/words';
 import { sounds } from './utils/sound';
 
@@ -45,6 +46,7 @@ export default function App() {
   const [rulesOpen, setRulesOpen] = useState(false);
   const [customPackModalOpen, setCustomPackModalOpen] = useState(false);
   const [firModalOpen, setFirModalOpen] = useState(false);
+  const [dareModalOpen, setDareModalOpen] = useState(false);
 
   // Active Round State
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -54,6 +56,7 @@ export default function App() {
   const [activeChaosModifier, setActiveChaosModifier] = useState(null);
   const [accusedPlayer, setAccusedPlayer] = useState(null);
   const [resultModalOpen, setResultModalOpen] = useState(false);
+  const [currentAuraOutcome, setCurrentAuraOutcome] = useState(null);
 
   const handleSaveCustomPack = (newPack) => {
     const updated = [...customPacks, newPack];
@@ -68,11 +71,9 @@ export default function App() {
 
   // Setup and launch a round
   const startNewRound = (goToPassPhone = true) => {
-    // 1. Pick a random word from the selected category
     const wordsList = selectedCategory.words;
     const randomWordObj = wordsList[Math.floor(Math.random() * wordsList.length)];
 
-    // 2. Pick N random unique imposter indices
     const availableIndices = players.map((_, idx) => idx);
     const chosenImposters = [];
     for (let i = 0; i < imposterCount; i++) {
@@ -82,7 +83,6 @@ export default function App() {
       availableIndices.splice(randIdx, 1);
     }
 
-    // 3. Pick Undercover player (if enabled and players >= 4)
     let chosenUndercover = null;
     if (undercoverEnabled && availableIndices.length > 0) {
       const randUndercoverIdx = Math.floor(Math.random() * availableIndices.length);
@@ -90,7 +90,6 @@ export default function App() {
       availableIndices.splice(randUndercoverIdx, 1);
     }
 
-    // 4. Pick Chaos Modifier (if enabled)
     let modifier = null;
     if (chaosEnabled) {
       modifier = CHAOS_MODIFIERS[Math.floor(Math.random() * CHAOS_MODIFIERS.length)];
@@ -112,6 +111,8 @@ export default function App() {
     setAccusedPlayer(null);
     setResultModalOpen(false);
     setFirModalOpen(false);
+    setDareModalOpen(false);
+    setCurrentAuraOutcome(null);
 
     if (goToPassPhone) {
       setScreen('PASS_PHONE');
@@ -143,6 +144,7 @@ export default function App() {
     sounds.stopSuspenseBGM();
     setResultModalOpen(false);
     setFirModalOpen(false);
+    setDareModalOpen(false);
     setScreen('LOBBY');
   };
 
@@ -226,7 +228,11 @@ export default function App() {
           secretWordData={secretWordData}
           onPlayAgain={handlePlayAgain}
           onBackToLobby={handleBackToLobby}
-          onOpenFIR={() => setFirModalOpen(true)}
+          onOpenFIR={(aura) => {
+            setCurrentAuraOutcome(aura);
+            setFirModalOpen(true);
+          }}
+          onOpenDare={() => setDareModalOpen(true)}
         />
 
         {/* Social Shareable FIR / Arrest Warrant Modal */}
@@ -237,6 +243,14 @@ export default function App() {
           players={players}
           imposterIndices={imposterIndices}
           secretWordData={secretWordData}
+          auraOutcome={currentAuraOutcome}
+        />
+
+        {/* Sazaa / Dare Roulette Modal */}
+        <DareModal
+          isOpen={dareModalOpen}
+          onClose={() => setDareModalOpen(false)}
+          punishedPlayer={accusedPlayer}
         />
       </div>
     </div>

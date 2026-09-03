@@ -233,6 +233,46 @@ class SoundEffects {
       osc.stop(this.ctx.currentTime + 0.35);
     } catch (e) {}
   }
+
+  // Iconic Gen-Z Vine Boom bass hit
+  playVineBoom() {
+    if (!this.enabled) return;
+    try {
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(95, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(24, this.ctx.currentTime + 0.65);
+
+      gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.7);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.7);
+    } catch (e) {}
+  }
+
+  // Sazaa Roulette Wheel tick sound
+  playWheelTick() {
+    if (!this.enabled) return;
+    try {
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.04);
+    } catch (e) {}
+  }
 }
 
 export const sounds = new SoundEffects();

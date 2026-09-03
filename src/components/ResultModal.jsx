@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Skull, Trophy, AlertOctagon, RotateCcw, Home, Sparkles, CheckCircle2, Share2, Camera } from 'lucide-react';
+import { Skull, Trophy, AlertOctagon, RotateCcw, Home, Sparkles, CheckCircle2, Share2, Camera, Flame } from 'lucide-react';
+import { calculateAuraOutcome } from '../data/words';
 import { sounds } from '../utils/sound';
 import { triggerHaptic } from '../utils/haptics';
 
@@ -13,7 +14,8 @@ export default function ResultModal({
   secretWordData,
   onPlayAgain,
   onBackToLobby,
-  onOpenFIR
+  onOpenFIR,
+  onOpenDare
 }) {
   if (!isOpen || !accusedPlayer) return null;
 
@@ -32,7 +34,6 @@ export default function ResultModal({
   useEffect(() => {
     if (isAccusedImposter) {
       const allChoices = [secretWordData.word, ...(secretWordData.decoys || [])];
-      // Shuffle choices
       const shuffled = allChoices.sort(() => 0.5 - Math.random());
       setWordChoices(shuffled);
     }
@@ -44,7 +45,7 @@ export default function ResultModal({
       sounds.playVoteStamp();
       triggerHaptic('heavy');
     } else {
-      sounds.playBuzzer();
+      sounds.playVineBoom();
       triggerHaptic('warning');
     }
   }, [isAccusedImposter]);
@@ -72,11 +73,17 @@ export default function ResultModal({
       fireConfetti();
     } else {
       setGuessOutcome('wrong');
-      sounds.playBuzzer();
+      sounds.playVineBoom();
       triggerHaptic('warning');
     }
     setPhase('final-outcome');
   };
+
+  const auraOutcome = calculateAuraOutcome({
+    isAccusedImposter,
+    isLastStandGuessCorrect: guessOutcome === 'correct',
+    accusedPlayerName: accusedPlayer.name
+  });
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
@@ -140,6 +147,20 @@ export default function ResultModal({
                   </p>
                 </div>
 
+                {/* AURA BADGE */}
+                <div className="w-full p-3 rounded-xl border-3 border-surface-container-lowest font-syne [box-shadow:3px_3px_0px_#0d0e12] flex items-center justify-between bg-secondary-container text-white">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">💀</span>
+                    <div className="text-left">
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-80 block">AURA VERDICT</span>
+                      <h4 className="text-sm font-extrabold tracking-tight uppercase leading-none">{auraOutcome.title}</h4>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-surface-container-lowest text-white">
+                    COOKED
+                  </span>
+                </div>
+
                 {/* Reveal Real Sus & Undercover */}
                 <div className="w-full bg-surface-container-low border-3 border-secondary-container p-4 rounded-2xl brutal-shadow-magenta text-center space-y-2">
                   <div>
@@ -171,8 +192,17 @@ export default function ResultModal({
                 </div>
 
                 <div className="w-full space-y-2.5 pt-2">
+                  {/* Sazaa / Dare Wheel Button */}
                   <button
-                    onClick={onOpenFIR}
+                    onClick={() => onOpenDare(accusedPlayer)}
+                    className="w-full py-3.5 bg-gradient-to-r from-[#ff5722] to-secondary-container text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
+                  >
+                    <Flame className="w-4 h-4" />
+                    <span>SPIN FOR SAZAA (DARE WHEEL) 🌶️💀</span>
+                  </button>
+
+                  <button
+                    onClick={() => onOpenFIR(auraOutcome)}
                     className="w-full py-3.5 bg-gradient-to-r from-secondary-container to-[#f59e0b] text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
                   >
                     <Share2 className="w-4 h-4" />
@@ -281,10 +311,37 @@ export default function ResultModal({
               </>
             )}
 
-            {/* Play Again and Social Share Buttons */}
+            {/* AURA SCORE CARD */}
+            <div className={`w-full p-3 rounded-xl border-3 border-surface-container-lowest font-syne [box-shadow:3px_3px_0px_#0d0e12] flex items-center justify-between ${
+              auraOutcome.status === 'positive'
+                ? 'bg-primary-container text-surface-container-lowest'
+                : 'bg-secondary-container text-white'
+            }`}>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">{auraOutcome.status === 'positive' ? '🗿' : '💀'}</span>
+                <div className="text-left">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-80 block">AURA VERDICT</span>
+                  <h4 className="text-sm font-extrabold tracking-tight uppercase leading-none">{auraOutcome.title}</h4>
+                </div>
+              </div>
+              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-surface-container-lowest text-white">
+                {auraOutcome.badge}
+              </span>
+            </div>
+
+            {/* Action Buttons */}
             <div className="w-full space-y-2.5 pt-2">
+              {/* Sazaa Dare Wheel */}
               <button
-                onClick={onOpenFIR}
+                onClick={() => onOpenDare(accusedPlayer)}
+                className="w-full py-3.5 bg-gradient-to-r from-[#ff5722] to-secondary-container text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
+              >
+                <Flame className="w-4 h-4" />
+                <span>SPIN FOR SAZAA (DARE WHEEL) 🌶️💀</span>
+              </button>
+
+              <button
+                onClick={() => onOpenFIR(auraOutcome)}
                 className="w-full py-3.5 bg-gradient-to-r from-secondary-container to-[#f59e0b] text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
               >
                 <Share2 className="w-4 h-4" />
