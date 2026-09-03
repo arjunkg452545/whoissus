@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import RulesModal from './components/RulesModal';
 import LobbyScreen from './components/LobbyScreen';
 import PassPhoneScreen from './components/PassPhoneScreen';
 import ArenaScreen from './components/ArenaScreen';
 import ResultModal from './components/ResultModal';
-import { CATEGORIES } from './data/words';
+import CustomPackModal from './components/CustomPackModal';
+import FIRReportModal from './components/FIRReportModal';
+import { CATEGORIES, CHAOS_MODIFIERS } from './data/words';
 import { sounds } from './utils/sound';
 
 export default function App() {
@@ -19,19 +21,50 @@ export default function App() {
     { id: '3', name: 'Kabir', emoji: '🔥', bgColor: 'bg-[#fed7aa]' },
     { id: '4', name: 'Zoya', emoji: '👾', bgColor: 'bg-[#acedff]' },
   ]);
+
+  // Custom Categories from localStorage
+  const [customPacks, setCustomPacks] = useState(() => {
+    try {
+      const saved = localStorage.getItem('whoissus_custom_packs');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const allCategories = [...CATEGORIES, ...customPacks];
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[0]);
   const [imposterCount, setImposterCount] = useState(1);
+
+  // Advanced Game Mode Toggles
+  const [undercoverEnabled, setUndercoverEnabled] = useState(false);
+  const [chaosEnabled, setChaosEnabled] = useState(false);
 
   // App UI state
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [rulesOpen, setRulesOpen] = useState(false);
+  const [customPackModalOpen, setCustomPackModalOpen] = useState(false);
+  const [firModalOpen, setFirModalOpen] = useState(false);
 
   // Active Round State
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [secretWordData, setSecretWordData] = useState(null);
   const [imposterIndices, setImposterIndices] = useState([]);
+  const [undercoverIndex, setUndercoverIndex] = useState(null);
+  const [activeChaosModifier, setActiveChaosModifier] = useState(null);
   const [accusedPlayer, setAccusedPlayer] = useState(null);
   const [resultModalOpen, setResultModalOpen] = useState(false);
+
+  const handleSaveCustomPack = (newPack) => {
+    const updated = [...customPacks, newPack];
+    setCustomPacks(updated);
+    try {
+      localStorage.setItem('whoissus_custom_packs', JSON.stringify(updated));
+    } catch (err) {
+      console.error('Failed to save to localStorage', err);
+    }
+    setSelectedCategory(newPack);
+  };
 
   // Setup and launch a round
   const startNewRound = (goToPassPhone = true) => {
@@ -49,17 +82,36 @@ export default function App() {
       availableIndices.splice(randIdx, 1);
     }
 
+    // 3. Pick Undercover player (if enabled and players >= 4)
+    let chosenUndercover = null;
+    if (undercoverEnabled && availableIndices.length > 0) {
+      const randUndercoverIdx = Math.floor(Math.random() * availableIndices.length);
+      chosenUndercover = availableIndices[randUndercoverIdx];
+      availableIndices.splice(randUndercoverIdx, 1);
+    }
+
+    // 4. Pick Chaos Modifier (if enabled)
+    let modifier = null;
+    if (chaosEnabled) {
+      modifier = CHAOS_MODIFIERS[Math.floor(Math.random() * CHAOS_MODIFIERS.length)];
+    }
+
     setSecretWordData({
       word: randomWordObj.word,
       hint: randomWordObj.hint,
       decoys: randomWordObj.decoys,
+      undercoverWord: randomWordObj.undercoverWord || randomWordObj.word,
       categoryName: selectedCategory.name,
       categoryEmoji: selectedCategory.emoji
     });
     setImposterIndices(chosenImposters);
+    setUndercoverIndex(chosenUndercover);
+    setActiveChaosModifier(modifier);
+
     setCurrentPlayerIndex(0);
     setAccusedPlayer(null);
     setResultModalOpen(false);
+    setFirModalOpen(false);
 
     if (goToPassPhone) {
       setScreen('PASS_PHONE');
@@ -88,7 +140,9 @@ export default function App() {
   };
 
   const handleBackToLobby = () => {
+    sounds.stopSuspenseBGM();
     setResultModalOpen(false);
+    setFirModalOpen(false);
     setScreen('LOBBY');
   };
 
@@ -110,10 +164,16 @@ export default function App() {
           <LobbyScreen
             players={players}
             setPlayers={setPlayers}
+            categories={allCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             imposterCount={imposterCount}
             setImposterCount={setImposterCount}
+            undercoverEnabled={undercoverEnabled}
+            setUndercoverEnabled={setUndercoverEnabled}
+            chaosEnabled={chaosEnabled}
+            setChaosEnabled={setChaosEnabled}
+            onOpenCustomPack={() => setCustomPackModalOpen(true)}
             onStartGame={handleStartGame}
           />
         )}
@@ -124,6 +184,8 @@ export default function App() {
             currentPlayerIndex={currentPlayerIndex}
             secretWordData={secretWordData}
             imposterIndices={imposterIndices}
+            undercoverIndex={undercoverIndex}
+            chaosModifier={activeChaosModifier}
             onNextPlayer={handleNextPlayer}
             onFinishPassRound={handleFinishPassRound}
           />
@@ -134,6 +196,8 @@ export default function App() {
             players={players}
             secretWordData={secretWordData}
             imposterIndices={imposterIndices}
+            undercoverIndex={undercoverIndex}
+            chaosModifier={activeChaosModifier}
             onRevealImposter={handleRevealImposter}
             onPlayAgain={handlePlayAgain}
           />
@@ -145,15 +209,34 @@ export default function App() {
           onClose={() => setRulesOpen(false)}
         />
 
-        {/* Verdict & Imposter's Last Stand Modal */}
+        {/* Custom Pack Creator Modal */}
+        <CustomPackModal
+          isOpen={customPackModalOpen}
+          onClose={() => setCustomPackModalOpen(false)}
+          onSave={handleSaveCustomPack}
+        />
+
+        {/* Verdict & The Sus's Last Stand Modal */}
         <ResultModal
           isOpen={resultModalOpen}
           accusedPlayer={accusedPlayer}
           players={players}
           imposterIndices={imposterIndices}
+          undercoverIndex={undercoverIndex}
           secretWordData={secretWordData}
           onPlayAgain={handlePlayAgain}
           onBackToLobby={handleBackToLobby}
+          onOpenFIR={() => setFirModalOpen(true)}
+        />
+
+        {/* Social Shareable FIR / Arrest Warrant Modal */}
+        <FIRReportModal
+          isOpen={firModalOpen}
+          onClose={() => setFirModalOpen(false)}
+          accusedPlayer={accusedPlayer}
+          players={players}
+          imposterIndices={imposterIndices}
+          secretWordData={secretWordData}
         />
       </div>
     </div>

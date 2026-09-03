@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, AlertTriangle, Flame, ShieldAlert, UserCheck, Play, RotateCcw, PlusCircle } from 'lucide-react';
+import { Clock, AlertTriangle, Flame, ShieldAlert, UserCheck, Play, RotateCcw, PlusCircle, Volume2, VolumeX, Zap } from 'lucide-react';
 import { TIPS } from '../data/words';
 import { sounds } from '../utils/sound';
 import { triggerHaptic } from '../utils/haptics';
@@ -8,6 +8,8 @@ export default function ArenaScreen({
   players,
   secretWordData,
   imposterIndices,
+  undercoverIndex,
+  chaosModifier,
   onRevealImposter,
   onPlayAgain
 }) {
@@ -15,7 +17,22 @@ export default function ArenaScreen({
   const [isTimerActive, setIsTimerActive] = useState(true);
   const [votes, setVotes] = useState({}); // { [playerId]: count }
   const [selectedSuspectId, setSelectedSuspectId] = useState(null);
-  const [randomTipIndex, setRandomTipIndex] = useState(0);
+
+  const isPanic = secondsRemaining <= 15;
+
+  // Suspense BGM lifecyle & panic mode shift
+  useEffect(() => {
+    sounds.startSuspenseBGM(false);
+    return () => {
+      sounds.stopSuspenseBGM();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPanic) {
+      sounds.startSuspenseBGM(true);
+    }
+  }, [isPanic]);
 
   // Timer countdown
   useEffect(() => {
@@ -50,7 +67,6 @@ export default function ArenaScreen({
   // SVG circular progress calculation
   const totalDuration = 120;
   const strokeDashoffset = 213.6 - (213.6 * secondsRemaining) / totalDuration;
-  const isPanic = secondsRemaining <= 15;
 
   const handleVote = (playerId) => {
     sounds.playVoteStamp();
@@ -84,7 +100,8 @@ export default function ArenaScreen({
   const leadingPlayer = getLeadingPlayer();
 
   const handleTriggerReveal = () => {
-    sounds.playClick();
+    sounds.stopSuspenseBGM();
+    sounds.playDramaticReveal();
     triggerHaptic('heavy');
     // If no one voted yet, default to first or selected
     const chosenPlayer = leadingPlayer || (selectedSuspectId ? players.find(p => p.id === selectedSuspectId) : players[0]);
@@ -105,6 +122,26 @@ export default function ArenaScreen({
       </section>
 
       <div className="px-4 space-y-4">
+        {/* Chaos Modifier Alert Banner if Active */}
+        {chaosModifier && (
+          <div className="w-full bg-[#f59e0b] text-surface-container-lowest border-3 border-surface-container-lowest p-3 rounded-xl [box-shadow:4px_4px_0px_#0d0e12] flex items-center gap-2.5 animate-in slide-in-from-top-2">
+            <span className="text-2xl shrink-0">{chaosModifier.emoji}</span>
+            <div className="flex-1">
+              <div className="flex items-center gap-1.5">
+                <span className="font-syne text-[9px] uppercase font-extrabold tracking-wider bg-surface-container-lowest text-[#f59e0b] px-1.5 py-0.5 rounded">
+                  CHAOS RULE
+                </span>
+                <span className="font-syne text-xs font-extrabold uppercase tracking-tight">
+                  {chaosModifier.name}
+                </span>
+              </div>
+              <p className="text-xs font-bold leading-tight mt-0.5 text-surface-container-lowest/90">
+                {chaosModifier.rule}
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* 2. Round & Timer Banner Card */}
         <div className={`w-full bg-surface-container border-3 border-surface-container-lowest rounded-2xl p-4 flex items-center justify-between [box-shadow:4px_4px_0px_#0d0e12] relative overflow-hidden ${
           isPanic ? 'hazard-stripes text-white' : ''
@@ -130,7 +167,7 @@ export default function ArenaScreen({
             </div>
 
             <p className="text-xs text-on-surface-variant font-medium mt-0.5">
-              Ask tricky questions & spot who is nervous!
+              Ask tricky clues & listen carefully to each player!
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Skull, Trophy, AlertOctagon, RotateCcw, Home, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Skull, Trophy, AlertOctagon, RotateCcw, Home, Sparkles, CheckCircle2, Share2, Camera } from 'lucide-react';
 import { sounds } from '../utils/sound';
 import { triggerHaptic } from '../utils/haptics';
 
@@ -9,14 +9,17 @@ export default function ResultModal({
   accusedPlayer,
   players,
   imposterIndices,
+  undercoverIndex,
   secretWordData,
   onPlayAgain,
-  onBackToLobby
+  onBackToLobby,
+  onOpenFIR
 }) {
   if (!isOpen || !accusedPlayer) return null;
 
   const imposterPlayers = imposterIndices.map(idx => players[idx]);
   const isAccusedImposter = imposterIndices.some(idx => players[idx].id === accusedPlayer.id);
+  const undercoverPlayer = (undercoverIndex !== null && undercoverIndex !== undefined) ? players[undercoverIndex] : null;
 
   // Imposter's Last Stand state
   const [phase, setPhase] = useState('verdict'); // 'verdict' | 'last-stand' | 'final-outcome'
@@ -133,27 +136,49 @@ export default function ResultModal({
                     {accusedPlayer.name} WAS INNOCENT!
                   </h2>
                   <p className="text-xs text-on-surface-variant font-medium mt-1">
-                    You eliminated a civilian! The real imposter fooled everyone!
+                    You eliminated a civilian! The real Sus fooled everyone!
                   </p>
                 </div>
 
-                {/* Reveal Real Imposter */}
-                <div className="w-full bg-surface-container-low border-3 border-secondary-container p-4 rounded-2xl brutal-shadow-magenta text-center">
-                  <span className="text-[10px] font-syne text-secondary-container font-extrabold uppercase tracking-widest">
-                    THE REAL SUS WAS
-                  </span>
-                  <div className="flex items-center justify-center gap-2 mt-1">
-                    <span className="text-2xl">{imposterPlayers[0]?.emoji}</span>
-                    <span className="font-syne text-xl font-extrabold text-white uppercase">
-                      {imposterPlayers.map(p => p.name).join(", ")}
+                {/* Reveal Real Sus & Undercover */}
+                <div className="w-full bg-surface-container-low border-3 border-secondary-container p-4 rounded-2xl brutal-shadow-magenta text-center space-y-2">
+                  <div>
+                    <span className="text-[10px] font-syne text-secondary-container font-extrabold uppercase tracking-widest">
+                      THE REAL SUS WAS
                     </span>
+                    <div className="flex items-center justify-center gap-2 mt-1">
+                      <span className="text-2xl">{imposterPlayers[0]?.emoji}</span>
+                      <span className="font-syne text-xl font-extrabold text-white uppercase">
+                        {imposterPlayers.map(p => p.name).join(", ")}
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-2 text-xs bg-surface-container-lowest py-1 px-2 rounded font-syne text-primary-container font-bold">
+
+                  {undercoverPlayer && (
+                    <div className="border-t border-surface-container-lowest/40 pt-2">
+                      <span className="text-[10px] font-syne text-[#f59e0b] font-extrabold uppercase tracking-widest">
+                        UNDERCOVER (AADHA SUS):
+                      </span>
+                      <p className="font-syne text-sm font-extrabold text-[#f59e0b]">
+                        {undercoverPlayer.name} ({secretWordData.undercoverWord || secretWordData.word})
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="text-xs bg-surface-container-lowest py-1 px-2 rounded font-syne text-primary-container font-bold">
                     Secret Word was: "{secretWordData.word}"
                   </div>
                 </div>
 
                 <div className="w-full space-y-2.5 pt-2">
+                  <button
+                    onClick={onOpenFIR}
+                    className="w-full py-3.5 bg-gradient-to-r from-secondary-container to-[#f59e0b] text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
+                  >
+                    <Share2 className="w-4 h-4" />
+                    <span>DOWNLOAD ARREST REPORT / INSTA STORY 📸</span>
+                  </button>
+
                   <button
                     onClick={onPlayAgain}
                     className="w-full py-3.5 bg-primary-container text-on-primary font-syne text-sm font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
@@ -256,8 +281,16 @@ export default function ResultModal({
               </>
             )}
 
-            {/* Play Again Buttons */}
+            {/* Play Again and Social Share Buttons */}
             <div className="w-full space-y-2.5 pt-2">
+              <button
+                onClick={onOpenFIR}
+                className="w-full py-3.5 bg-gradient-to-r from-secondary-container to-[#f59e0b] text-white font-syne text-xs font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"
+              >
+                <Share2 className="w-4 h-4" />
+                <span>DOWNLOAD ARREST REPORT / INSTA STORY 📸</span>
+              </button>
+
               <button
                 onClick={onPlayAgain}
                 className="w-full py-4 bg-primary-container text-on-primary font-syne text-sm font-extrabold uppercase rounded-xl brutal-border brutal-shadow brutal-btn flex items-center justify-center gap-2"

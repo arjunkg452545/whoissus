@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, Eye, EyeOff, ShieldAlert, Sparkles, Fingerprint, ArrowRight, AlertTriangle, Utensils } from 'lucide-react';
+import { Lock, Eye, EyeOff, ShieldAlert, Sparkles, Fingerprint, ArrowRight, AlertTriangle, Scan } from 'lucide-react';
 import { sounds } from '../utils/sound';
 import { triggerHaptic } from '../utils/haptics';
 
@@ -8,6 +8,8 @@ export default function PassPhoneScreen({
   currentPlayerIndex,
   secretWordData,
   imposterIndices,
+  undercoverIndex,
+  chaosModifier,
   onNextPlayer,
   onFinishPassRound
 }) {
@@ -16,6 +18,7 @@ export default function PassPhoneScreen({
 
   const currentPlayer = players[currentPlayerIndex];
   const isImposter = imposterIndices.includes(currentPlayerIndex);
+  const isUndercover = undercoverIndex === currentPlayerIndex;
   const isLastPlayer = currentPlayerIndex === players.length - 1;
 
   const handleStartPeek = () => {
@@ -90,9 +93,8 @@ export default function PassPhoneScreen({
         {isPeeking ? (
           /* REVEAL STATE */
           isImposter ? (
-            /* VARIANT B: THE IMPOSTER (SUS) */
+            /* VARIANT B: THE SUS (SUSPICIOUS) */
             <div className="w-full bg-secondary-container text-white border-4 border-surface-container-lowest rounded-2xl p-5 [box-shadow:6px_6px_0px_#0d0e12] flex flex-col justify-between relative transition-all duration-150 animate-in zoom-in-95">
-              {/* Tilted Badge */}
               <div className="absolute -top-3.5 right-3 bg-surface-container-lowest text-primary-container px-3 py-1 rounded-full border-2 border-surface-container-lowest font-syne text-[11px] tracking-wider uppercase transform rotate-3 [box-shadow:2px_2px_0px_#0d0e12]">
                 💀 TOP SECRET • SUS
               </div>
@@ -115,16 +117,51 @@ export default function PassPhoneScreen({
                 </div>
               </div>
 
-              <div className="bg-surface-container-lowest text-on-surface p-3 rounded-xl border-2 border-surface-container-lowest mt-2">
+              <div className="bg-surface-container-lowest text-on-surface p-3 rounded-xl border-2 border-surface-container-lowest mt-2 space-y-1.5">
                 <p className="text-xs font-semibold text-secondary-fixed">
                   🎭 <span className="font-bold text-white">Your Mission:</span> You are the Suspicious one! Listen to their clues and fake it so no one votes for you!
+                </p>
+                {chaosModifier?.id === 'mukhbir' && (
+                  <p className="text-[11px] bg-warning-orange/20 text-warning-orange border border-warning-orange/40 px-2 py-1 rounded font-syne font-extrabold">
+                    🕵️ MUKHBIR INTEL: Word starts with "{secretWordData.word[0]}"!
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : isUndercover ? (
+            /* VARIANT C: THE UNDERCOVER (AADHA SUS) */
+            <div className="w-full bg-[#f59e0b] text-surface-container-lowest border-4 border-surface-container-lowest rounded-2xl p-5 [box-shadow:6px_6px_0px_#0d0e12] flex flex-col justify-between relative transition-all duration-150 animate-in zoom-in-95">
+              <div className="absolute -top-3.5 right-3 bg-surface-container-lowest text-[#f59e0b] px-3 py-1 rounded-full border-2 border-surface-container-lowest font-syne text-[11px] tracking-wider uppercase transform rotate-3 [box-shadow:2px_2px_0px_#0d0e12]">
+                🎭 AADHA SUS • UNDERCOVER
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between border-b-2 border-surface-container-lowest pb-2 mb-3">
+                  <span className="font-syne text-[11px] uppercase font-extrabold tracking-wider bg-surface-container-lowest text-[#f59e0b] px-2 py-0.5 rounded">
+                    CATEGORY: {secretWordData.categoryName}
+                  </span>
+                  <span className="text-lg">{secretWordData.categoryEmoji}</span>
+                </div>
+
+                <div className="text-center py-3">
+                  <span className="text-xs font-syne font-extrabold uppercase text-surface-container-lowest/70 tracking-widest">
+                    YOUR SECRET WORD IS
+                  </span>
+                  <h2 className="font-syne text-3xl font-extrabold uppercase leading-tight tracking-wide text-surface-container-lowest mt-1">
+                    {secretWordData.undercoverWord || secretWordData.word}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="bg-surface-container-lowest text-on-surface p-2.5 rounded-xl border-2 border-surface-container-lowest mt-2 text-center">
+                <p className="text-xs font-bold text-[#f59e0b]">
+                  ⚠️ You might be Undercover with a slightly different word! Act natural & defend yourself!
                 </p>
               </div>
             </div>
           ) : (
             /* VARIANT A: CIVILIAN (INNOCENT) */
             <div className="w-full bg-tertiary-fixed text-surface-container-lowest border-4 border-surface-container-lowest rounded-2xl p-5 [box-shadow:6px_6px_0px_#0d0e12] flex flex-col justify-between relative transition-all duration-150 animate-in zoom-in-95">
-              {/* Tilted Badge */}
               <div className="absolute -top-3.5 right-3 bg-secondary-container text-white px-3 py-1 rounded-full border-2 border-surface-container-lowest font-syne text-[11px] tracking-wider uppercase transform rotate-3 [box-shadow:2px_2px_0px_#0d0e12]">
                 CONFIDENTIAL • CIVILIAN
               </div>
@@ -158,8 +195,8 @@ export default function PassPhoneScreen({
             </div>
           )
         ) : (
-          /* HIDDEN STATE (DEFAULT) */
-          <div className="w-full bg-surface-container border-4 border-surface-container-lowest rounded-2xl p-6 [box-shadow:4px_4px_0px_#0d0e12] flex flex-col items-center justify-center text-center gap-4 min-h-[290px]">
+          /* HIDDEN STATE: HOLOGRAPHIC BIOMETRIC SCANNER */
+          <div className="w-full bg-surface-container border-4 border-surface-container-lowest rounded-2xl p-6 [box-shadow:4px_4px_0px_#0d0e12] flex flex-col items-center justify-center text-center gap-4 min-h-[290px] relative overflow-hidden">
             <div className="w-16 h-16 rounded-2xl bg-surface-container-high border-3 border-surface-container-lowest flex items-center justify-center brutal-shadow-sm rotate-[-3deg]">
               <Lock className="w-8 h-8 text-primary-container" />
             </div>
@@ -172,7 +209,7 @@ export default function PassPhoneScreen({
               </p>
             </div>
 
-            {/* Tap & Hold Peek Trigger */}
+            {/* Holographic Biometric Scanner Button */}
             <div className="w-full pt-2">
               <button
                 type="button"
@@ -180,13 +217,14 @@ export default function PassPhoneScreen({
                 onMouseUp={handleEndPeek}
                 onTouchStart={handleStartPeek}
                 onTouchEnd={handleEndPeek}
-                className="w-full py-4 bg-tertiary-fixed text-surface-container-lowest font-syne text-base font-extrabold uppercase rounded-xl border-3 border-surface-container-lowest brutal-shadow brutal-btn flex items-center justify-center gap-2 hover:bg-[#8ee7fc] select-none"
+                className="w-full py-4 bg-tertiary-fixed text-surface-container-lowest font-syne text-base font-extrabold uppercase rounded-xl border-3 border-surface-container-lowest brutal-shadow brutal-btn flex items-center justify-center gap-2 hover:bg-[#8ee7fc] select-none relative overflow-hidden"
               >
-                <Fingerprint className="w-6 h-6 animate-pulse" />
-                <span>PRESS & HOLD TO PEEK 🤫</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+                <Scan className="w-6 h-6 animate-pulse text-surface-container-lowest" />
+                <span>PRESS & HOLD TO SCAN 🤫</span>
               </button>
               <span className="text-[10px] text-outline block mt-1.5 uppercase font-syne font-bold">
-                (Hold down to see • Release to hide)
+                (Hold down to scan • Release to hide)
               </span>
             </div>
           </div>
@@ -208,7 +246,7 @@ export default function PassPhoneScreen({
         </button>
         {!hasPeekingOccurred && (
           <p className="text-center text-[11px] text-outline mt-1 font-sans">
-            * Please peek at your role first before passing!
+            * Please scan your secret card before passing!
           </p>
         )}
       </div>

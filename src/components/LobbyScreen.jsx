@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Check, Copy, CheckCheck, Flame, Skull, Sparkles, Sliders } from 'lucide-react';
+import { Plus, Trash2, Check, Copy, CheckCheck, Flame, Skull, Sparkles, Sliders, Dices, FolderPlus } from 'lucide-react';
 import { CATEGORIES } from '../data/words';
 import { sounds } from '../utils/sound';
 import { triggerHaptic } from '../utils/haptics';
@@ -18,17 +18,20 @@ const CHIP_BG_COLORS = [
 export default function LobbyScreen({
   players,
   setPlayers,
+  categories,
   selectedCategory,
   setSelectedCategory,
   imposterCount,
   setImposterCount,
+  undercoverEnabled,
+  setUndercoverEnabled,
+  chaosEnabled,
+  setChaosEnabled,
+  onOpenCustomPack,
   onStartGame
 }) {
   const [newPlayerName, setNewPlayerName] = useState('');
   const [copiedCode, setCopiedCode] = useState(false);
-  const [showCustomWordModal, setShowCustomWordModal] = useState(false);
-  const [customWord, setCustomWord] = useState('');
-  const [customCategory, setCustomCategory] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const roomCode = "#SUS-9021";
@@ -92,6 +95,18 @@ export default function LobbyScreen({
     setImposterCount(count);
   };
 
+  const handleToggleUndercover = () => {
+    sounds.playClick();
+    triggerHaptic('medium');
+    setUndercoverEnabled(!undercoverEnabled);
+  };
+
+  const handleToggleChaos = () => {
+    sounds.playClick();
+    triggerHaptic('medium');
+    setChaosEnabled(!chaosEnabled);
+  };
+
   const handleLaunch = () => {
     if (players.length < 3) {
       setErrorMessage('Add at least 3 players to start the chaos!');
@@ -111,7 +126,7 @@ export default function LobbyScreen({
   };
 
   return (
-    <div className="flex-1 flex flex-col px-4 pt-20 pb-32 space-y-6">
+    <div className="flex-1 flex flex-col px-4 pt-20 pb-36 space-y-6">
       {/* 1. Room Code Banner & Quick Status */}
       <div className="relative mt-2">
         <div className="bg-surface-container-low brutal-border brutal-shadow rounded-xl p-3 flex items-center justify-between relative overflow-hidden">
@@ -213,14 +228,17 @@ export default function LobbyScreen({
               CHOOSE THE DRAMA 🎯
             </span>
           </div>
-          <span className="font-syne text-[11px] font-bold bg-surface-container-high px-2 py-0.5 rounded text-outline-variant uppercase">
-            1 Pick
-          </span>
+          <button
+            onClick={onOpenCustomPack}
+            className="font-syne text-[11px] font-extrabold bg-primary-container text-on-primary px-2 py-0.5 rounded border border-surface-container-lowest brutal-shadow-sm uppercase flex items-center gap-1 hover:bg-[#b0dc00]"
+          >
+            <FolderPlus className="w-3.5 h-3.5" /> + CUSTOM PACK
+          </button>
         </div>
 
         {/* Category Cards Bento */}
         <div className="grid grid-cols-2 gap-3">
-          {CATEGORIES.map((cat) => {
+          {categories.map((cat) => {
             const isSelected = selectedCategory.id === cat.id;
             return (
               <div
@@ -244,7 +262,7 @@ export default function LobbyScreen({
                       {cat.badge}
                     </span>
                   </div>
-                  <h4 className="font-syne font-extrabold text-sm text-primary leading-tight mt-1">
+                  <h4 className="font-syne font-extrabold text-sm text-primary leading-tight mt-1 truncate">
                     {cat.name}
                   </h4>
                   <p className="text-on-surface-variant text-[11px] leading-snug">
@@ -257,20 +275,15 @@ export default function LobbyScreen({
         </div>
       </section>
 
-      {/* 4. Imposter Settings Toggle */}
+      {/* 4. Game Modes & Advanced Party Modifiers */}
       <section className="space-y-3">
-        <div className="flex items-center justify-between">
-          <span className="font-syne text-sm font-extrabold uppercase text-primary flex items-center gap-1.5">
-            <Skull className="w-4 h-4 text-secondary-container" />
-            HOW MANY SUS? 👀
-          </span>
-          <span className="text-[11px] text-on-surface-variant font-medium">
-            Secret role count
-          </span>
-        </div>
+        <span className="font-syne text-sm font-extrabold uppercase text-primary flex items-center gap-1.5">
+          <Sliders className="w-4 h-4 text-primary-container" />
+          PARTY SETTINGS & ROLES ⚡
+        </span>
 
+        {/* Imposter Count Stepper */}
         <div className="grid grid-cols-2 gap-3">
-          {/* 1 Sus Option */}
           <button
             type="button"
             onClick={() => handleToggleImposter(1)}
@@ -281,15 +294,14 @@ export default function LobbyScreen({
             }`}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="font-syne font-extrabold text-base">1 SUS 🕵️‍♂️</span>
+              <span className="font-syne font-extrabold text-sm">1 SUS 🕵️‍♂️</span>
               {imposterCount === 1 && <Check className="w-4 h-4" />}
             </div>
-            <p className="text-[11px] opacity-90 leading-tight">
-              Classic Paranoia. Perfect for 3 to 6 players.
+            <p className="text-[10px] opacity-90 leading-tight">
+              Classic Paranoia (3-6 players).
             </p>
           </button>
 
-          {/* 2 Sus Option */}
           <button
             type="button"
             onClick={() => handleToggleImposter(2)}
@@ -300,13 +312,77 @@ export default function LobbyScreen({
             }`}
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="font-syne font-extrabold text-base">2 SUS 💀💀</span>
+              <span className="font-syne font-extrabold text-sm">2 SUS 💀💀</span>
               {imposterCount === 2 && <Check className="w-4 h-4" />}
             </div>
-            <p className="text-[11px] opacity-90 leading-tight">
-              Double Treason! Best for 6+ big squads.
+            <p className="text-[10px] opacity-90 leading-tight">
+              Double Treason (Best for 6+).
             </p>
           </button>
+        </div>
+
+        {/* The Undercover Role Toggle (Aadha Sus) */}
+        <div
+          onClick={handleToggleUndercover}
+          className={`p-3 rounded-xl brutal-border cursor-pointer transition-all flex items-center justify-between ${
+            undercoverEnabled
+              ? "bg-[#f59e0b]/20 border-[#f59e0b] brutal-shadow"
+              : "bg-surface-container brutal-shadow-sm hover:bg-surface-container-high"
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="text-2xl">🎭</span>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h4 className="font-syne font-extrabold text-sm text-primary uppercase">
+                  THE UNDERCOVER (AADHA SUS)
+                </h4>
+                <span className="text-[9px] bg-[#f59e0b] text-black font-syne font-extrabold px-1.5 py-0.2 rounded">
+                  CHAOS!
+                </span>
+              </div>
+              <p className="text-[11px] text-on-surface-variant leading-tight mt-0.5">
+                1 player gets a slightly different word (e.g. Pani Puri vs Dahi Puri)!
+              </p>
+            </div>
+          </div>
+          <div className={`w-6 h-6 rounded-full border-2 border-surface-container-lowest flex items-center justify-center font-bold text-xs ${
+            undercoverEnabled ? "bg-[#f59e0b] text-black" : "bg-surface-container-high text-outline"
+          }`}>
+            {undercoverEnabled ? "✓" : ""}
+          </div>
+        </div>
+
+        {/* Chaos Modifiers Toggle */}
+        <div
+          onClick={handleToggleChaos}
+          className={`p-3 rounded-xl brutal-border cursor-pointer transition-all flex items-center justify-between ${
+            chaosEnabled
+              ? "bg-secondary-container/20 border-secondary-container brutal-shadow"
+              : "bg-surface-container brutal-shadow-sm hover:bg-surface-container-high"
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="text-2xl">🎲</span>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h4 className="font-syne font-extrabold text-sm text-primary uppercase">
+                  CHAOS MODIFIER CARDS
+                </h4>
+                <span className="text-[9px] bg-secondary-container text-white font-syne font-extrabold px-1.5 py-0.2 rounded">
+                  NEW
+                </span>
+              </div>
+              <p className="text-[11px] text-on-surface-variant leading-tight mt-0.5">
+                Random twist each round (One-Word Trap, Rapid Fire, Mukhbir)!
+              </p>
+            </div>
+          </div>
+          <div className={`w-6 h-6 rounded-full border-2 border-surface-container-lowest flex items-center justify-center font-bold text-xs ${
+            chaosEnabled ? "bg-secondary-container text-white" : "bg-surface-container-high text-outline"
+          }`}>
+            {chaosEnabled ? "✓" : ""}
+          </div>
         </div>
       </section>
 
