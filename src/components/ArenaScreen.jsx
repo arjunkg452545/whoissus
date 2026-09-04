@@ -109,7 +109,7 @@ export default function ArenaScreen({
   };
 
   return (
-    <div className="flex-1 flex flex-col pt-16 pb-28 space-y-4 max-w-[480px] mx-auto w-full">
+    <div className="flex-1 flex flex-col pt-[72px] pb-28 space-y-4 max-w-[480px] mx-auto w-full">
       {/* 1. TOP MARQUEE TICKER RIBBON */}
       <section className="w-full bg-secondary-container border-b-2 border-surface-container-lowest overflow-hidden py-1.5 flex items-center relative z-20">
         <div className="animate-ticker whitespace-nowrap flex items-center">

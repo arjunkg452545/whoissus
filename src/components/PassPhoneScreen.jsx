@@ -47,7 +47,7 @@ export default function PassPhoneScreen({
   };
 
   return (
-    <div className="h-full max-h-full flex-1 flex flex-col px-3.5 pt-[72px] pb-[max(0.75rem,env(safe-area-inset-bottom))] justify-between select-none overflow-hidden overscroll-none max-w-[480px] mx-auto w-full">
+    <div className="h-full max-h-full flex-1 flex flex-col px-3.5 pt-[88px] pb-[max(0.75rem,env(safe-area-inset-bottom))] justify-between select-none overflow-hidden overscroll-none max-w-[480px] mx-auto w-full">
       {/* 1. Unified Pass & Player Banner (Merged for zero-scroll mobile fit) */}
       <section className="shrink-0">
         <div className="bg-primary-container text-surface-container-lowest border-3 border-surface-container-lowest p-2 rounded-xl [box-shadow:3px_3px_0px_#0d0e12] flex items-center justify-between relative overflow-hidden">
