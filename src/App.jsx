@@ -149,9 +149,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-container-lowest text-on-surface flex justify-center items-start selection:bg-primary-container selection:text-surface-container-lowest">
+    <div className={`min-h-screen ${screen === 'PASS_PHONE' ? 'h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none' : ''} bg-surface-container-lowest text-on-surface flex justify-center items-start selection:bg-primary-container selection:text-surface-container-lowest`}>
       {/* Mobile Device Simulation Frame (strictly max-w-[480px]) */}
-      <div className="w-full max-w-[480px] min-h-screen bg-surface flex flex-col relative border-x-4 border-surface-container-lowest shadow-2xl">
+      <div className={`w-full max-w-[480px] ${screen === 'PASS_PHONE' ? 'h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none' : 'min-h-screen'} bg-surface flex flex-col relative border-x-4 border-surface-container-lowest shadow-2xl`}>
         {/* Global Header */}
         <Header
           soundEnabled={soundEnabled}

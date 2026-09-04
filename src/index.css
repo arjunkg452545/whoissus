@@ -6,10 +6,12 @@
   * {
     -webkit-tap-highlight-color: transparent;
   }
-  body {
+  html, body {
     background-color: #0d0e12;
     color: #e3e2e8;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
