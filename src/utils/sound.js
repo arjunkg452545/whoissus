@@ -273,6 +273,61 @@ class SoundEffects {
       osc.stop(this.ctx.currentTime + 0.04);
     } catch (e) {}
   }
+
+  // Dramatic drumroll building up tension for dare dice
+  playDrumroll() {
+    if (!this.enabled) return;
+    try {
+      this.init();
+      const time = this.ctx.currentTime;
+      // Snare noise burst
+      const noiseBuffer = this.ctx.createBuffer(1, this.ctx.sampleRate * 0.04, this.ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < noiseBuffer.length; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+      const noiseSource = this.ctx.createBufferSource();
+      noiseSource.buffer = noiseBuffer;
+
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = "bandpass";
+      filter.frequency.value = 1200;
+
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.12, time);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+
+      noiseSource.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+      noiseSource.start(time);
+    } catch (e) {}
+  }
+
+  // Punchy fanfare/brass sound when the dare is finalized
+  playFanfare() {
+    if (!this.enabled) return;
+    try {
+      this.init();
+      const notes = [392.00, 523.25, 659.25, 783.99]; // G4, C5, E5, G5
+      notes.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = "sawtooth";
+        const startTime = this.ctx.currentTime + idx * 0.07;
+        const duration = idx === notes.length - 1 ? 0.6 : 0.12;
+
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.16, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      });
+    } catch (e) {}
+  }
 }
 
 export const sounds = new SoundEffects();

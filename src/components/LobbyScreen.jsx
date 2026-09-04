@@ -258,14 +258,14 @@ export default function LobbyScreen({
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between">
                     <span className="text-2xl">{cat.emoji}</span>
-                    <span className="font-syne text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-surface-container-lowest text-outline">
+                    <span className="font-syne text-[8.5px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-surface-container-lowest text-outline tracking-wider">
                       {cat.badge}
                     </span>
                   </div>
-                  <h4 className="font-syne font-extrabold text-sm text-primary leading-tight mt-1 truncate">
+                  <h4 className="font-syne font-extrabold text-[13px] text-primary leading-tight mt-1 min-h-[2.2rem] flex items-center">
                     {cat.name}
                   </h4>
-                  <p className="text-on-surface-variant text-[11px] leading-snug">
+                  <p className="text-on-surface-variant text-[11px] leading-snug font-medium">
                     {cat.words.length} secret words
                   </p>
                 </div>
